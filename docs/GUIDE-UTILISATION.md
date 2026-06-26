@@ -32,8 +32,7 @@ Le cœur du système tourne autour de **trois commandes** qui synchronisent ton 
 
 À lancer quand tu as fini un bout de travail significatif. Effets :
 
-- Met à jour **Archon MCP** (les tâches du projet)
-- Met à jour `project-state.xml` (état local du projet)
+- Met à jour `project-state.xml` (état local du projet et suivi des tâches)
 - Sauvegarde les 3 derniers messages de la conversation
 - Backup automatique avant écrasement
 
@@ -94,7 +93,7 @@ Après un `/compact` ou au début d'une nouvelle session, `/followup` lit `proje
 
 ### `/followup-doctor` — diagnostic de cohérence
 
-Vérifie la cohérence entre Archon MCP et `project-state.xml`. À lancer si tu soupçonnes une désynchronisation (ex : tâches qui disparaissent, statut incohérent).
+Vérifie la cohérence entre `project-state.xml` et les fichiers réels du projet. À lancer si tu soupçonnes une désynchronisation (ex : tâches qui disparaissent, statut incohérent).
 
 ---
 
@@ -119,7 +118,7 @@ Vérifie la cohérence entre Archon MCP et `project-state.xml`. À lancer si tu 
 
 # Tu bosses 2 heures, tu finis la feature
 /update-all
-# → Archon task marquée done, project-state.xml à jour, doc propagée
+# → tâche marquée done dans project-state.xml, doc propagée
 
 # Tu lances /compact pour libérer du contexte
 /compact
@@ -147,7 +146,7 @@ Orni-Skills est modulaire. Chaque projet installe uniquement les modules dont il
 
 | Code | Commande | Module | Usage |
 |------|----------|--------|-------|
-| **UF** | `/orni-init-uf` | Update / Followup | Sync Archon MCP + project-state.xml + 3 derniers messages. **Cœur du protocole de session**. |
+| **UF** | `/orni-init-uf` | Update / Followup | Sync project-state.xml (état + suivi des tâches) + 3 derniers messages. **Cœur du protocole de session**. |
 | **PSS** | `/orni-init-pss` | Project Status Snapshot | Rapport JSON + humain 4 sections, regen via `/orni-status`. |
 | **AR** | `/orni-init-archi` | Architecture Relationnelle | Cartographie composants + relations + ADRs. |
 | **ML** | `/orni-init-ml` | Mailbox inter-projets | Messagerie asynchrone entre projets via `~/.claude/mailbox/`. |
@@ -243,9 +242,9 @@ Orni-Skills est modulaire. Chaque projet installe uniquement les modules dont il
 | Démarrer nouveau projet conventionnel (CRM, SaaS, community) | `/orni-init-full` (BMAD inclus) + `/bmad-help` pour workflow |
 | Refactor module critique (paiement, IA agentique, pipeline data) | Superpowers (plugin global) : `brainstorming` → `writing-plans` → `test-driven-development` |
 | Reprendre projet existant après pause | `/followup` (recharge contexte depuis project-state.xml) |
-| Finir une feature, avant `/compact` | `/update-all` (Archon + state + audit + propagation doc) |
+| Finir une feature, avant `/compact` | `/update-all` (state + audit + propagation doc) |
 | Audit conversation vs code | `/update-prd` (38+ items typés OK/PARTIEL/NON IMPLEMENTE/DECISION/DIFFERE/RETIRE) |
-| Diagnostic incohérence Archon ↔ state.xml | `/followup-doctor` |
+| Diagnostic incohérence state.xml ↔ fichiers réels | `/followup-doctor` |
 
 ### Infrastructure & ops
 
@@ -283,7 +282,7 @@ Orni-Skills est modulaire. Chaque projet installe uniquement les modules dont il
 ### À faire
 
 ✅ **`/update-all` avant tout `/compact`** — sinon perte de contexte  
-✅ **Laisser Archon MCP gérer les tâches** — pas de fichiers TODO manuels  
+✅ **Laisser `project-state.xml` gérer les tâches** — pas de fichiers TODO manuels  
 ✅ **Faire confiance au système de backup** — `_backup/` est créé automatiquement  
 ✅ **Lire `CLAUDE.md` du projet au démarrage** — contient les règles spécifiques  
 ✅ **Surveiller le statusline** — le pace calculator alerte si tu consommes trop de contexte  
@@ -347,10 +346,6 @@ Pour transformer un prompt flou en prompt structuré (format CO-STAR+) :
 
 → Lance `/update-all` puis `/compact`. Le statusline indique quand tu approches de la limite.
 
-### "Archon MCP échoue avec 'Failed to reconnect'"
-
-→ Voir `~/.claude/docs/archon-mcp-troubleshooting.md` (laptop) ou redémarrer Docker Desktop.
-
 ### "project-state.xml a disparu"
 
 → Vérifier `_backup/project-state/current/project-state_latest.xml` (backup automatique).
@@ -395,7 +390,7 @@ Pour les agents qui veulent comprendre l'écosystème complet (pas juste les com
 │ Modules Orni-Skills (skills + commandes) : ~22 modules      │  ← installables /orni-init-*
 ├─────────────────────────────────────────────────────────────┤
 │ Mémoire persistante : project-state.xml + MEMORY.md +       │  ← per-projet + global
-│   ~/.claude/mailbox/ + Archon MCP                           │
+│   ~/.claude/mailbox/                                        │
 ├─────────────────────────────────────────────────────────────┤
 │ Meta-commandes : orni-help / orni-checkup /                 │  ← maintenance
 │   orni-init-full / orni-update-full / register-launcher     │
@@ -436,7 +431,7 @@ mon-projet/
 |-------|--------|
 | Style communication, vulgarisation, caveman policy, browser policy | `~/.claude/CLAUDE.md` global |
 | Framework choisi pour ce projet + modules installés | `CLAUDE.md` projet (généré `/orni-init-claude-md`) |
-| Tâches en cours + état projet | Archon MCP + `project-state.xml` |
+| Tâches en cours + état projet | `project-state.xml` |
 | Décisions / lessons learned cross-session | `MEMORY.md` (auto-memory) + `~/.claude/memory/` |
 | Décisionnaire framework (GSD/BMAD/Superpowers) | `skills/gsd/SKILL.md` section 1 |
 | Catalogue commandes Orni complet | `/orni-help` ou `commands/orni-help.md` |

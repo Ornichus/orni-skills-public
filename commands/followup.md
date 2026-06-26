@@ -1,66 +1,31 @@
 ---
-description: 'Affiche état du projet depuis Archon MCP et project-state.xml'
+description: 'Menu de consultation etat projet — state, prd, ou full'
 ---
 
-# /followup - Lecture état du projet
+# /followup - Etat du projet
 
-Affiche l'état actuel du projet depuis Archon MCP et project-state.xml.
+Point d'entree pour consulter l'etat du projet. Propose 3 modes.
 
 ## Instructions
 
-1. **Identifier le projet courant:**
-   - Lire `CLAUDE.md` à la racine du projet pour trouver l'**Archon Project ID**
-   - Pattern à chercher: `**Archon Project ID:** \`xxx-xxx-xxx\``
-   - Si non trouvé, demander à l'utilisateur
+1. **Si argument fourni** (ex: `/followup state`, `/followup prd`, `/followup full`) :
+   - Executer directement le mode correspondant sans afficher le menu
 
-2. **Lire Archon MCP:**
-   - `find_projects(project_id="<ID trouvé>")` pour le projet
-   - `find_tasks(project_id="<ID trouvé>", filter_by="status", filter_value="doing")` pour tâches en cours
-   - `find_tasks(project_id="<ID trouvé>", filter_by="status", filter_value="review")` pour tâches en review
-   - `find_tasks(project_id="<ID trouvé>", filter_by="status", filter_value="todo", per_page=10)` pour tâches à faire
+2. **Sinon, afficher le menu :**
 
-3. **Lire project-state.xml:**
-   - Fichier: `{project-root}/project-state.xml` (fichier local au projet)
-   - Si le fichier n'existe pas, indiquer qu'il faut utiliser `/update` pour le créer
-   - Extraire les informations clés: objectif, tâches, history, milestones
+   ```
+   ## /followup — Quel mode ?
 
-4. **Afficher un résumé structuré**
+   | # | Mode | Description |
+   |---|------|-------------|
+   | 1 | **State** | project-state.xml (taches, objectifs, historique) |
+   | 2 | **PRD** | Etat de la documentation (PS, PRD, architecture.md, tags de statut) |
+   | 3 | **Full** | State puis PRD |
 
-## Format de sortie
+   Choix (1/2/3) :
+   ```
 
-```
-# État du Projet: [NOM_PROJET]
-
-**Archon ID:** `xxx-xxx-xxx`
-
-## Objectif Actuel (project-state.xml)
-**[NOM_OBJECTIF]** - Status: [STATUS]
-> [DESCRIPTION]
-
-## Tâches en Cours (Archon)
-| Tâche | Assignée à | Feature |
-|-------|------------|---------|
-| ... | ... | ... |
-
-## Tâches en Review (Archon)
-| Tâche | Assignée à | Feature |
-|-------|------------|---------|
-| ... | ... | ... |
-
-## Prochaines Tâches (Archon)
-| Tâche | Priorité | Feature |
-|-------|----------|---------|
-| ... | ... | ... |
-
-## Derniers Événements (project-state.xml)
-- [DATE] - Événement 1
-- [DATE] - Événement 2
-
-## Milestones Complétés
-- [x] Milestone 1 (DATE)
-- [x] Milestone 2 (DATE)
-
-## Notes
-- Note 1
-- Note 2
-```
+3. **Executer le mode choisi :**
+   - **1 (State)** : Suivre les instructions de `/followup-state`
+   - **2 (PRD)** : Suivre les instructions de `/followup-prd`
+   - **3 (Full)** : Suivre les instructions de `/followup-full`

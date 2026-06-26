@@ -18,7 +18,7 @@ Point d'entree pour les mises a jour projet. Propose 3 modes.
 
    | # | Mode | Description | Quand l'utiliser |
    |---|------|-------------|-----------------|
-   | 1 | **State** | Archon MCP + project-state.xml + synthese conversation | Fin de session (leger, ~30-50K tokens) |
+   | 1 | **State** | project-state.xml + synthese conversation | Fin de session (leger, ~30-50K tokens) |
    | 2 | **PRD** | Audit conversation vs code + propagation docs (PS, PRD, architecture.md) | Debut de session suivante (lourd, ~80-150K tokens) |
    | 3 | **All** | State maintenant + PRD marque en attente | Fin de session (lance state, differe prd) |
 

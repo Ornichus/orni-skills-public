@@ -15,7 +15,7 @@ Chaque module s'installe dans un projet via une commande `/orni-init-*` et se me
 | **ATeam** | AT | Composition d'équipes d'agents + Council délibératif |
 | **Mailbox** | ML | Messagerie inter-projets (sync, live-talk, conférence multi-agents) |
 | **Agent Browser** | AB | Automatisation navigateur via `agent-browser` (Windows/WSL) |
-| **Update / Followup** | UF | Synchronisation Archon MCP + état projet + diagnostic |
+| **Update / Followup** | UF | Synchronisation de l'état projet (project-state.xml) + diagnostic |
 | **Project State** | PSM | Gestion de `project-state.xml` |
 | **Project Status Snapshot** | PSS | Rapport d'état condensé (JSON + format humain 4 sections) |
 | **Structure** | STR | Restructureur de prompt professionnel |
@@ -73,7 +73,7 @@ Le dossier `_bmad/` embarque par ailleurs le framework **BMAD** (Module Builder,
 | `/architecture` | Génère la doc d'architecture relationnelle |
 | `/ateam suggest` | Compose une équipe d'agents adaptée au contexte |
 | `/mail-send` · `/mail-read` | Messagerie inter-projets |
-| `/update` · `/followup` | Sync Archon MCP + état projet |
+| `/update` · `/followup` | Synchronisation de l'état projet (project-state.xml) |
 | `/orni-status` | Rapport d'état condensé |
 | `/structure` | Restructure un prompt en format professionnel |
 | `/setup-agent-browser` | Configure agent-browser sur Windows/WSL |
@@ -94,7 +94,6 @@ orni-skills/
 ## Configuration requise
 
 - **Claude Code** récent
-- **Archon MCP** (optionnel — gestion de tâches/projets)
 - **Docker Desktop** (optionnel — pour le MCP Toolkit)
 
 Certains modules (Deploy, Cloudflare, VPS, Fal Image Gen) nécessitent que tu fournisses **ta propre configuration** (domaine, serveur, clés d'API) dans des fichiers locaux non versionnés — voir le `SKILL.md` de chaque module. Aucune clé ni aucun secret n'est inclus dans ce dépôt.

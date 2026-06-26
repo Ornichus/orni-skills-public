@@ -34,9 +34,9 @@ Afficher le catalogue ci-dessous en remplacant chaque `{status}` par :
 #### Gestion de projet
 | Status | Commande | Description |
 |--------|----------|-------------|
-| {status} | `/update` | Met a jour Archon MCP et project-state.xml |
-| {status} | `/followup` | Affiche etat du projet (Archon + XML) |
-| {status} | `/followup-doctor` | Diagnostic coherence Archon / XML / fichiers |
+| {status} | `/update` | Met a jour project-state.xml (etat + suivi des taches) |
+| {status} | `/followup` | Affiche etat du projet (project-state.xml) |
+| {status} | `/followup-doctor` | Diagnostic coherence project-state.xml / fichiers |
 | {status} | `/structure` | Restructureur de prompt professionnel |
 | {status} | `/register-launcher` | Enregistre le projet dans orni-dashboard (systray) |
 

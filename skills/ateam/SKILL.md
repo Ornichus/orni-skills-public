@@ -503,7 +503,7 @@ Le lead remplace ces variables dans les prompts avant le spawn :
 | `{IP}` | IP LAN de la machine | `192.168.1.50` |
 | `{SCOPE}` | Perimetre de travail | `frontend`, `backend`, `all` |
 | `{FEATURE}` | Feature en cours | `login-form` |
-| `{PROJECT_ID}` | Archon Project ID | `xxxxxxxx-...` |
+| `{PROJECT_ID}` | Project ID | `xxxxxxxx-...` |
 
 ---
 

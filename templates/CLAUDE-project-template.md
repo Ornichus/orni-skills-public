@@ -1,6 +1,6 @@
 # {{PROJECT_NAME}}
 
-> **Archon ID** `{{ARCHON_ID}}` · **Bootstrap** `/orni-init-claude-md` v2.0 (DENSE-POINTEURS) · **Sync** {{LAST_SYNC_DATE}}
+> **Project ID** `{{PROJECT_ID}}` · **Bootstrap** `/orni-init-claude-md` v2.0 (DENSE-POINTEURS) · **Sync** {{LAST_SYNC_DATE}}
 > **Style/communication** : `~/.claude/CLAUDE.md` (pyramide inversée, vulgarisation, caveman INTERNE/EXTERNE, VPS inventory, browser policy)
 > **Guide écosystème** : `{{ORNI_PATH}}/docs/GUIDE-UTILISATION.md` (catalogue §4 · décisionnaire §4.5 · architecture)
 
@@ -70,7 +70,7 @@ Source : `.claude/orni-manifest.json` · regen via `/orni-init-claude-md --refre
 | Reprise / nouvelle session | `/followup` |
 | Finir bloc / avant `/compact` | `/update-all` |
 | Audit conversation vs code | `/update-prd` |
-| Diagnostic Archon ↔ state.xml | `/followup-doctor` |
+| Diagnostic state.xml ↔ fichiers réels | `/followup-doctor` |
 | Catalogue commandes | `/orni-help` |
 | Snapshot projet | `/orni-status` |
 
@@ -89,7 +89,7 @@ Source : `.claude/orni-manifest.json` · regen via `/orni-init-claude-md --refre
 *(libre — ce qu'il ne faut PAS faire ici)*
 
 ## Mémoire persistance
-`project-state.xml` · Archon MCP · `MEMORY.md` (auto-memory cross-session) · `~/.claude/mailbox/{{PROJECT_SLUG}}/` · `docs/_backup/audit-reports/`
+`project-state.xml` · `MEMORY.md` (auto-memory cross-session) · `~/.claude/mailbox/{{PROJECT_SLUG}}/` · `docs/_backup/audit-reports/`
 
 ## Notes projet
 *(libre, préservé par `--augment`)*

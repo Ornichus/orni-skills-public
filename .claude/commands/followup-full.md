@@ -22,7 +22,7 @@ Affiche l'etat du projet puis l'etat de la documentation en sequence.
    ```
    ## Sante globale du projet
 
-   - **Taches Archon :** N en cours, N en review, N todo
+   - **Taches (project-state.xml) :** N en cours, N en review, N todo
    - **Documentation :** N tags non-resolus ([NON IMPLEMENTE] + [PARTIEL])
    - **Dernier audit :** YYYY-MM-DD (ou "jamais")
    - **Recommandation :** [action prioritaire si applicable]

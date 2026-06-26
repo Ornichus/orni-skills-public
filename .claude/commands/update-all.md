@@ -37,7 +37,6 @@ SESSION_ID={session-id depuis project-state.xml}
 ## /update-all termine
 
 ### State
-- Archon MCP : [resume]
 - project-state.xml : [resume]
 
 ### PRD (differe)

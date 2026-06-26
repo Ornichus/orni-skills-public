@@ -17,7 +17,7 @@ Charge le skill `task-orchestrator` et exécute le sous-mode demandé.
 | Mode | Effet |
 |------|-------|
 | (aucun) | `visualize` (vue état seule, read-only) |
-| `inventory` | Scan + merge dedup tâches (Archon + state.xml + conv + git) |
+| `inventory` | Scan + merge dedup tâches (state.xml + conv + git) |
 | `organize` | DAG dépendances + waves parallèles/séquentielles |
 | `route` | Recommande framework + skill/tool par tâche |
 | `visualize` | Compose vue user (table + KPIs + Gantt ASCII) |
@@ -46,7 +46,7 @@ Charge le skill `task-orchestrator` et exécute le sous-mode demandé.
 2. **Identifier le mode demandé** depuis `$ARGUMENTS`. Si vide → `visualize`.
 
 3. **Exécuter le sous-mode** en suivant l'algorithme du skill :
-   - `inventory` : scan 5 sources + dedup → output JSON interne
+   - `inventory` : scan 4 sources + dedup → output JSON interne
    - `organize` : DAG + waves → output structure waves
    - `route` : pattern match framework + tool par tâche
    - `visualize` : compose vue user finale (markdown table + KPIs + Gantt)
@@ -64,7 +64,7 @@ Charge le skill `task-orchestrator` et exécute le sous-mode demandé.
 
 ## Notes
 
-- **Pré-requis** : ce projet doit avoir au moins Archon MCP configuré ET `project-state.xml` présent. Sinon `inventory` retombe sur conversation + git seulement.
+- **Pré-requis** : ce projet doit avoir `project-state.xml` présent. Sinon `inventory` retombe sur conversation + git seulement.
 - **Worktrees** : skill auto-crée `.worktrees/` (gitignored) pour wave parallèle code. Cleanup auto post-wave si KPIs OK.
 - **Goal** : requiert Claude Code v2.1.139+. Si version inférieure, fallback message "use --auto execute instead".
 - **Synergie** : skill lit `CLAUDE.md` projet pour décisionnaire local + `{ORNI}/docs/GUIDE-UTILISATION.md` §4.5 + `{ORNI}/skills/gsd/SKILL.md` §1. Zéro duplication.

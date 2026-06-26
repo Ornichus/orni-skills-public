@@ -41,7 +41,7 @@ Commande `/ateam` pour composer et lancer des equipes d'agents Claude Code.
 | `--scope <s>` | Perimetre: frontend/backend/integration/all |
 | `--iterate` | Mode iterate-test-fix en boucle |
 | `--name <nom>` | Nom de l'equipe (defaut: auto) |
-| `--tasks` | Charger les taches depuis Archon MCP |
+| `--tasks` | Charger les taches depuis project-state.xml |
 
 ## Prerequis
 
@@ -106,7 +106,7 @@ Commande `/ateam-council` pour invoquer un council de vrais agents BMAD qui deli
 | `--scenario <nom>` | Charger un scenario pre-configure |
 | `--output <fichier>` | Sauvegarder le rapport final |
 | `--plan` | Enchainer vers Plan Mode apres le council |
-| `--tasks` | Charger les taches Archon comme contexte |
+| `--tasks` | Charger les taches de project-state.xml comme contexte |
 
 ### Superviseurs
 

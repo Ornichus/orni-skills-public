@@ -65,7 +65,7 @@ Le fichier `project-status.json` se trouve a la racine du projet.
 | `current.question` | string | Question/objectif principal de la session, dans les mots de l'utilisateur |
 | `current.summary` | string | Resume de la session en 1 phrase. Si impossible en 1 phrase, clarifier davantage |
 | `current.decisions` | array | Decisions/choix significatifs de la session |
-| `current.next_actions` | array | Prochaines actions (top 3-5, depuis taches Archon todo) |
+| `current.next_actions` | array | Prochaines actions (top 3-5, depuis les taches todo de project-state.xml) |
 | `current.blockers` | array | Bloqueurs identifies (vide si aucun) |
 | `current.metrics` | object | Metriques projet — cles bien-connues + libre par projet |
 | `history` | array | Max 3 snapshots precedents (condenses) |
@@ -95,7 +95,7 @@ Remplir chaque champ depuis ces sources (par priorite) :
 | `question` | Synthetiser depuis `<current-objective>` de project-state.xml ou contexte conversation |
 | `summary` | Synthese 1 phrase de ce qui a ete accompli (depuis resume utilisateur etape 2 de /update) |
 | `decisions` | Decisions/choix significatifs identifies dans la session |
-| `next_actions` | Taches Archon avec status=todo (top 3-5) |
+| `next_actions` | Taches de project-state.xml avec status=todo (top 3-5) |
 | `blockers` | Depuis contexte conversation (vide si aucun) |
 | `metrics.progress_percent` | Depuis `<progress-percent>` de project-state.xml si disponible |
 

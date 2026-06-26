@@ -31,7 +31,7 @@ Compose une equipe d'agents optimale selon le contexte et les roles demandes, pu
 - `--scope <s>` - Perimetre: frontend / backend / integration / all
 - `--iterate` - Active le mode iterate-test-fix
 - `--name <nom>` - Nom de l'equipe (defaut: auto-genere)
-- `--tasks` - Charger les taches depuis Archon MCP
+- `--tasks` - Charger les taches depuis project-state.xml
 - `--links <url...>` - URLs a explorer (pour research et research-council)
 - `--council-mode <m>` - Mode du council: debate (defaut) / advisory / round-table / review
 - `--council-agents <a...>` - Agents BMAD pour le council (defaut: auto-selection)
@@ -52,7 +52,7 @@ Tu es le **lead agent** de l'equipe. Suis ces etapes dans l'ordre.
    - **Extraction automatique des URLs:** Scanner tout le texte utilisateur pour detecter les URLs (pattern `https?://...`). Si des URLs sont trouvees et que `--links` n'est pas specifie, les utiliser automatiquement comme `--links`. Le reste du texte (hors URLs et options) = le sujet/contexte de la demande.
 
 2. **Lire le contexte projet:**
-   - Lire `CLAUDE.md` du projet courant -> extraire l'Archon Project ID si present
+   - Lire `CLAUDE.md` du projet courant -> extraire le Project ID si present
    - Lire `project-state.xml` si present -> objectif courant, taches
    - Lire `package.json` si present -> detecter le stack technique
 
@@ -65,12 +65,10 @@ Tu es le **lead agent** de l'equipe. Suis ces etapes dans l'ordre.
    - Construire l'URL: `http://{IP}:{PORT}`
    - Informer l'utilisateur de l'URL detectee
 
-4. **Si `--tasks` ou Archon Project ID present:**
-   - Charger les taches Archon:
-     ```
-     find_tasks(project_id="{ID}", filter_by="status", filter_value="todo")
-     find_tasks(project_id="{ID}", filter_by="status", filter_value="doing")
-     ```
+4. **Si `--tasks` ou des taches presentes dans `project-state.xml`:**
+   - Charger les taches depuis la section `<tasks>` de `project-state.xml`:
+     - les taches avec status `todo`
+     - les taches avec status `doing`
 
 5. **Detecter le stack technique** (pour adapter les profils dev):
    - `package.json` -> dependencies: react, vue, next, express, fastapi...
@@ -127,7 +125,7 @@ Confirmer? Repondre "go" pour lancer, ou modifier les roles.
    - Nom auto si `--name` absent: `{projet}-{roles}` (ex: `myapp-dev-test`)
 
 2. **Creer les taches:**
-   - Si des taches Archon existent: les reprendre comme taches de la team
+   - Si des taches existent dans project-state.xml: les reprendre comme taches de la team
    - Sinon, creer des taches basees sur le contexte:
      - Taches de dev (pour agents dev)
      - Taches de test (pour agents test)
@@ -433,7 +431,7 @@ Quand tout le travail est termine:
 
 4. **Executer /update:**
    - C'est la DERNIERE action OBLIGATOIRE avant de rendre la main
-   - Synchronise Archon MCP et project-state.xml
+   - Synchronise project-state.xml
    - NE PAS demander a l'utilisateur, l'executer directement
 
    ```

@@ -1,24 +1,18 @@
 ---
-description: 'Diagnostic de cohérence entre Archon MCP, project-state.xml et fichiers réels'
+description: 'Diagnostic de cohérence entre project-state.xml et fichiers réels'
 ---
 
 # /followup-doctor - Diagnostic de cohérence du projet
 
-Vérifie la cohérence entre Archon MCP, project-state.xml et l'état réel du projet courant.
+Vérifie la cohérence entre project-state.xml et l'état réel du projet courant.
 
 ## Instructions
 
 ### 1. Identifier le projet courant
 
-- Lire `CLAUDE.md` à la racine du projet pour trouver l'**Archon Project ID**
-- Pattern à chercher: `**Archon Project ID:** \`xxx-xxx-xxx\``
-- Si non trouvé, demander à l'utilisateur
+- Le projet courant = le répertoire courant ; `project-state.xml` se trouve à sa racine
 
 ### 2. Collecter les données
-
-**Archon MCP:**
-- `find_projects(project_id="<ID trouvé>")` pour les infos projet
-- `find_tasks(project_id="<ID trouvé>", per_page=50)` pour toutes les tâches
 
 **project-state.xml:**
 - Fichier: `{project-root}/project-state.xml` (fichier local au projet)
@@ -32,12 +26,11 @@ Vérifie la cohérence entre Archon MCP, project-state.xml et l'état réel du p
 
 | Vérification | Description |
 |--------------|-------------|
-| **SYNC-01** | Les tâches "done" dans Archon sont-elles dans `<tasks status="completed">` du XML ? |
-| **SYNC-02** | L'objectif actuel XML correspond-il aux tâches "doing" Archon ? |
-| **FILE-01** | Les fichiers clés listés dans `<resources>` existent-ils ? |
+| **FILE-01** | Les fichiers clés listés dans `<resources>` existent-ils réellement ? |
+| **SYNC-01** | L'objectif actuel du XML correspond-il à une tâche `doing` de la section `<tasks>` ? |
+| **SYNC-02** | Les tâches `<tasks status="done">` correspondent-elles aux livrables réellement présents ? |
 | **DATE-01** | La date `<last-updated>` est-elle récente (< 7 jours) ? |
-| **TASK-01** | Y a-t-il des tâches "doing" depuis trop longtemps (> 3 jours) ? |
-| **ID-01** | Le project-id dans le XML correspond-il à l'Archon ID dans CLAUDE.md ? |
+| **TASK-01** | Y a-t-il des tâches `doing` depuis trop longtemps (> 3 jours) ? |
 | **MILE-01** | Les milestones correspondent-ils à l'avancement réel ? |
 
 ### 4. Générer le rapport
@@ -49,22 +42,20 @@ Vérifie la cohérence entre Archon MCP, project-state.xml et l'état réel du p
 
 ## Projet Détecté
 - **Nom:** [NOM]
-- **Archon ID:** `xxx-xxx-xxx`
 - **XML project-id:** `xxx-xxx-xxx`
 
 ## Résumé
 | Catégorie | Status | Issues |
 |-----------|--------|--------|
-| Synchronisation Archon/XML | ✅/⚠️/❌ | X issues |
+| Cohérence project-state.xml | ✅/⚠️/❌ | X issues |
 | Fichiers projet | ✅/⚠️/❌ | X issues |
 | Dates et fraîcheur | ✅/⚠️/❌ | X issues |
-| Cohérence IDs | ✅/⚠️/❌ | X issues |
 
 ## Détails des vérifications
 
 ### ✅ Vérifications OK
-- [SYNC-01] Tâches synchronisées
-- [ID-01] IDs cohérents
+- [SYNC-01] Objectif aligné avec les tâches en cours
+- [FILE-01] Fichiers clés présents
 
 ### ⚠️ Avertissements
 - [DATE-01] Dernière mise à jour il y a X jours

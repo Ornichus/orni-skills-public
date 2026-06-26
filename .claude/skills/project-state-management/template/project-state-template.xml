@@ -6,7 +6,7 @@
        ═══════════════════════════════════════════════════════════════════════════ -->
   <metadata>
     <name>PROJECT_NAME</name>
-    <archon-project-id>UUID_HERE</archon-project-id>
+    <project-id>UUID_HERE</project-id>
     <version>0.1.0</version>
     <last-updated>YYYY-MM-DDTHH:MM:SS+01:00</last-updated>
     <description>

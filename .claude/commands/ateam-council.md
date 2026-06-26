@@ -30,7 +30,7 @@ Invoque un council de vrais agents BMAD pour deliberer, reviewer ou debattre ava
 - `--scenario <nom>` - Charger un scenario pre-configure
 - `--output <fichier>` - Sauvegarder le rapport final
 - `--plan` - Enchainer vers Plan Mode apres le council
-- `--tasks` - Charger les taches Archon comme contexte
+- `--tasks` - Charger les taches de project-state.xml comme contexte
 
 ## Instructions d'execution
 
@@ -47,13 +47,10 @@ Tu es le **lead agent** du BMAD Council. Suis ces phases dans l'ordre strict.
    - Identifier les options: `--agents`, `--rounds`, `--size`, `--supervisor`, `--scenario`, `--output`, `--plan`, `--tasks`
 
 2. **Lire le contexte projet:**
-   - Lire `CLAUDE.md` du projet courant -> extraire l'Archon Project ID si present
+   - Lire `CLAUDE.md` du projet courant -> extraire le Project ID si present
    - Lire `project-state.xml` si present -> objectif courant, phase, taches
-   - Si `--tasks` ou Archon Project ID present:
-     ```
-     find_tasks(project_id="{ID}", filter_by="status", filter_value="doing")
-     find_tasks(project_id="{ID}", filter_by="status", filter_value="todo")
-     ```
+   - Si `--tasks` ou des taches presentes dans `project-state.xml`:
+     - Charger depuis la section `<tasks>` de `project-state.xml` les taches avec status `doing` puis `todo`
 
 3. **Lire le roster BMAD:**
    - Lire `_bmad/_config/agent-manifest.csv` depuis le projet courant
@@ -128,7 +125,7 @@ Afficher la composition proposee et attendre validation:
 
 ### Contexte charge
 - **Objectif courant:** {objectif depuis project-state.xml}
-- **Taches Archon:** {N} doing, {M} todo
+- **Taches:** {N} doing, {M} todo
 - **Fichier review:** {fichier si mode review}
 
 ---
@@ -214,7 +211,7 @@ Pour chaque agent selectionne:
    **Stack:** {stack detecte}
    **Phase BMAD:** {phase detectee}
    {Si mode review: "## DOCUMENT A REVIEWER\n{contenu du fichier}"}
-   {Si taches Archon: "## TACHES EN COURS\n{liste des taches}"}
+   {Si taches presentes: "## TACHES EN COURS\n{liste des taches}"}
    ```
 
 7. **Spawner:**
@@ -312,27 +309,15 @@ pour tour in 1..total_rounds:
    - Ecrire le rapport final dans le fichier indique
    - Confirmer: "Rapport sauvegarde dans {fichier}"
 
-5. **Si Archon Project ID present:**
-   - Archiver le rapport comme document Archon:
-   ```
-   manage_document("create",
-     project_id="{archon_id}",
-     title="Council Report: {topic}",
-     document_type="note",
-     content={rapport_structure},
-     tags=["council", "{mode}", "{agents}"]
-   )
-   ```
-
-6. **Executer /update:**
+5. **Executer /update:**
    - C'est la DERNIERE action OBLIGATOIRE avant de rendre la main
-   - Synchronise Archon MCP et project-state.xml
+   - Synchronise project-state.xml
    - NE PAS demander a l'utilisateur, l'executer directement
    ```
    /update
    ```
 
-7. **Si `--plan` specifie:**
+6. **Si `--plan` specifie:**
    - Injecter le rapport comme contexte
    - Activer Plan Mode:
      ```
@@ -340,4 +325,4 @@ pour tour in 1..total_rounds:
      ```
    - Le plan sera base sur les recommandations du council
 
-8. **STOP** - Attendre l'input utilisateur.
+7. **STOP** - Attendre l'input utilisateur.

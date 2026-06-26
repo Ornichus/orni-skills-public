@@ -1,45 +1,38 @@
 ---
-description: 'Met a jour Archon MCP et project-state.xml avec les changements recents (mode State)'
+description: 'Met a jour project-state.xml avec les changements recents (mode State)'
 ---
 
-# /update-state - Mise a jour Archon et Project State
+# /update-state - Mise a jour Project State
 
-Met à jour le suivi du projet dans Archon MCP et le fichier project-state.xml du projet courant.
+Met à jour le suivi du projet dans le fichier project-state.xml du projet courant.
 
 ## Instructions
 
 1. **Identifier le projet courant:**
-   - Lire `CLAUDE.md` à la racine du projet pour trouver l'**Archon Project ID**
-   - Pattern à chercher: `**Archon Project ID:** \`xxx-xxx-xxx\``
-   - Si non trouvé, demander à l'utilisateur
+   - Le projet courant = le répertoire courant ; son `project-state.xml` se trouve à la racine du projet
 
 2. **Demander un résumé** à l'utilisateur de ce qui a été accompli (si pas déjà clair du contexte)
 
-3. **Mettre à jour Archon MCP:**
-   - Utiliser `find_tasks(project_id="<ID trouvé dans CLAUDE.md>")` pour voir les tâches actuelles
-   - Mettre à jour les tâches avec `manage_task("update", task_id="...", status="done", description="...")`
-   - Créer de nouvelles tâches si nécessaire avec `manage_task("create", ...)`
-
-4. **Backup project-state.xml AVANT modification:**
+3. **Backup project-state.xml AVANT modification:**
    - Si `{project-root}/project-state.xml` existe:
      - Créer `_backup/project-state/archive/` et `_backup/project-state/current/` si absents (mkdir -p)
      - Copier vers `_backup/project-state/archive/project-state_{YYYY-MM-DD}_{HH-MM-SS}.xml` (horodatage UTC)
      - Copier vers `_backup/project-state/current/project-state_latest.xml` (écrase le précédent)
 
-5. **Mettre à jour project-state.xml:**
+4. **Mettre à jour project-state.xml:**
    - Chemin: `{project-root}/project-state.xml` (fichier local au projet)
    - Si le fichier n'existe pas, le créer avec la structure de base
    - Mettre à jour:
      - `<last-updated>` avec la date/heure actuelle (format ISO 8601)
      - `<session-id>` si nouvelle session
      - `<current-objective>` si l'objectif a changé
-     - `<tasks>` statuts des sous-tâches
+     - `<tasks>` statuts des sous-tâches (todo/doing/review/done)
      - `<history>` ajouter les événements récents
      - `<completed-milestone>` si un milestone est terminé
      - `<last-conversation>` avec les 3 derniers messages échangés (voir ci-dessous)
    - Sauvegarder les modifications
 
-5b. **Mettre a jour project-status.json (si PSS installe):**
+4b. **Mettre a jour project-status.json (si PSS installe):**
    - Verifier si `{project-root}/project-status.json` existe
    - Si NON : passer cette etape silencieusement (PSS non installe)
    - Si OUI :
@@ -55,13 +48,13 @@ Met à jour le suivi du projet dans Archon MCP et le fichier project-state.xml d
         - `question` : synthetiser l'objectif principal depuis `<current-objective>` ou contexte conversation
         - `summary` : synthese en 1 phrase de ce qui a ete accompli (depuis le resume de l'etape 2)
         - `decisions` : decisions/choix significatifs identifies dans la session (topic, analysis, result, status)
-        - `next_actions` : taches Archon avec status=todo (top 3-5)
+        - `next_actions` : taches avec status=todo dans `<tasks>` de project-state.xml (top 3-5)
         - `blockers` : depuis le contexte (vide si aucun)
         - `metrics.progress_percent` : depuis `<progress-percent>` de project-state.xml si disponible
      d. Ecrire le fichier mis a jour
    - Ne PAS ajouter de confirmation separee (le rapport final mentionne le fichier)
 
-6. **Capturer les 3 derniers messages de la conversation:**
+5. **Capturer les 3 derniers messages de la conversation:**
    - Remonter dans le contexte de conversation actuel
    - Identifier les 3 derniers messages échangés entre l'utilisateur et l'agent (AVANT l'appel à /update)
    - Ne PAS inclure le message /update lui-même
@@ -78,7 +71,7 @@ Met à jour le suivi du projet dans Archon MCP et le fichier project-state.xml d
    - Résumer chaque message de façon concise mais fidèle (max 200 caractères)
    - Si un message contient du code ou des résultats d'outils, résumer l'action et le résultat
 
-7. **Confirmer** les mises à jour effectuées à l'utilisateur
+6. **Confirmer** les mises à jour effectuées à l'utilisateur
 
 ## Structure project-state.xml (si création nécessaire)
 
@@ -87,7 +80,7 @@ Met à jour le suivi du projet dans Archon MCP et le fichier project-state.xml d
 <project-state>
   <metadata>
     <project-name>NOM DU PROJET</project-name>
-    <project-id>ARCHON PROJECT ID</project-id>
+    <project-id>IDENTIFIANT DU PROJET</project-id>
     <created>DATE ISO 8601</created>
     <last-updated>DATE ISO 8601</last-updated>
     <session-id>session-001</session-id>
@@ -128,11 +121,7 @@ Met à jour le suivi du projet dans Archon MCP et le fichier project-state.xml d
 
 ### Projet détecté
 - Nom: ...
-- Archon ID: ...
-
-### Archon MCP
-- [x] Tâche XXX marquée comme terminée
-- [x] Nouvelle tâche YYY créée
+- Project ID: ...
 
 ### project-state.xml
 - [x] Objectif actuel: ...

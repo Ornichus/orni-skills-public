@@ -25,7 +25,6 @@ Affiche un rapport d'etat structure en 4 sections (ou mode rapide). Lit `project
      1. **Contexte de la conversation en cours** (objectif, decisions, ce qui a ete fait)
      2. **project-state.xml** si present (session-id, phase, current-objective, tasks)
      3. **CLAUDE.md** (description du projet, documentation referencee)
-     4. **Archon MCP** si disponible (taches todo/doing/done)
    - Remplir les champs `current` selon les regles de generation du SKILL.md (section 2)
    - Resoudre le slug du projet (project-state.xml > CLAUDE.md H1 > basename)
    - **Creer/mettre a jour `project-status.json`** avec les donnees generees :

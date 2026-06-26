@@ -69,7 +69,7 @@ Bootstrap le framework **GSD** (Get Shit Done) dans le projet courant. GSD est d
 
    Lire `{PROJET}/CLAUDE.md` (créer si absent avec heading H1 = nom du projet).
 
-   Ajouter section (avant la première section existante, après le bloc Archon ID s'il existe) :
+   Ajouter section (avant la première section existante, après le bloc Project ID s'il existe) :
 
    ```markdown
    ## Framework de développement : GSD

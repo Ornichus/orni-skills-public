@@ -1,6 +1,6 @@
 ---
 name: task-orchestrator
-description: Meta-orchestrateur sur GSD/BMAD/Superpowers. Inventorie les tâches (Archon + state.xml + conversation + git), les organise en waves parallèles/séquentielles, route chaque tâche vers le bon framework selon décisionnaire Orni, visualise avec KPIs typés (validation/valeur/custom), exécute via subagents + worktrees, et peut générer un prompt /goal <4k chars pour boucle autonome.
+description: Meta-orchestrateur sur GSD/BMAD/Superpowers. Inventorie les tâches (state.xml + conversation + git), les organise en waves parallèles/séquentielles, route chaque tâche vers le bon framework selon décisionnaire Orni, visualise avec KPIs typés (validation/valeur/custom), exécute via subagents + worktrees, et peut générer un prompt /goal <4k chars pour boucle autonome.
 ---
 
 # Task Orchestrator — Skill méta-orchestrateur Orni
@@ -39,7 +39,7 @@ Invoquer ce skill quand :
 | Mode | Effet |
 |------|-------|
 | `/orchestrate` (sans arg) | Équivalent `visualize` — vue état seule |
-| `/orchestrate inventory` | Scan + merge dedup 5 sources |
+| `/orchestrate inventory` | Scan + merge dedup 4 sources |
 | `/orchestrate organize` | Analyse dépendances + DAG waves |
 | `/orchestrate route` | Match framework + tool per tâche |
 | `/orchestrate visualize` | Compose tout en vue user (table + KPIs + Gantt) |
@@ -62,14 +62,13 @@ Invoquer ce skill quand :
 
 ## Sous-mode 1 — Inventory
 
-Scanne et merge 5 sources avec déduplication intelligente.
+Scanne et merge 4 sources avec déduplication intelligente.
 
 ### Sources
 
 | Source | Méthode | Notes |
 |--------|---------|-------|
-| **Archon MCP** | `mcp__archon__find_tasks(filter_by=status, filter_value=todo)` + `doing` + `review` | Source de vérité tâches structurées |
-| **project-state.xml** | Parse `<tasks status="todo">` + `<pending-followup>` | Tâches projet persistantes |
+| **project-state.xml** | Parse `<tasks status="todo">` + `<pending-followup>` | Source de vérité des tâches (statuts todo/doing/review/done) |
 | **Conversation courante** | Heuristic — phrases user "à faire / TODO / il faut / ensuite", listes numérotées | Volatile, prio basse |
 | **git status** | `git status --short` + `git diff --stat` | WIP signals (uncommitted) |
 | **TODO/FIXME code** (opt-in `--include-code-todos`) | Grep `TODO\|FIXME\|XXX` | Bruyant, à filtrer manuellement |
@@ -80,12 +79,12 @@ Scanne et merge 5 sources avec déduplication intelligente.
 1. Charger toutes les tâches de toutes les sources
 2. Normaliser titres (lowercase, remove stopwords, strip ponctuation)
 3. Pour chaque paire (A, B) :
-   - Si A.archon_id == B.archon_id → merge (Archon source)
+   - Si A.task_id == B.task_id → merge (même tâche state.xml)
    - Si Levenshtein(A.title_normalized, B.title_normalized) ratio > 0.7 → merge candidate
 4. Pour chaque merge candidate, résoudre :
-   - Si A.source = archon, B.source = state-xml → garde A, ajoute "also in state-xml"
-   - Si A.source = conversation, B.source = archon → garde B (Archon prime)
-   - Statut : précédence Archon doing > Archon todo > state.xml todo > conv mention
+   - Si A.source = state-xml, B.source = conversation → garde A, ajoute "also in conversation"
+   - Si A.source = conversation, B.source = state-xml → garde B (state.xml prime)
+   - Statut : précédence state.xml doing > state.xml todo > conv mention
 5. Output : liste typée flat avec `sources: [...]` indiqué
 ```
 
@@ -96,7 +95,7 @@ tasks:
   - id: "fix-tva-arrondi"
     title: "Fix bug TVA arrondi multi-lignes"
     status: "todo"
-    sources: ["archon:9ae3f0db", "conv:msg-5"]
+    sources: ["state-xml:t-04", "conv:msg-5"]
     priority: "high"
 ```
 
@@ -198,7 +197,7 @@ Compose inventory + organize + route en vue claire user. **Mode par défaut quan
 === ORCHESTRATION — Session 2026-XX-XX HH:MM ===
 
 📋 Inventory (10 tâches après dedup)
-  Sources: Archon 3 · state.xml 2 · conversation 5 · git 0 · code-todos 0
+  Sources: state.xml 5 · conversation 5 · git 0 · code-todos 0
   Statuts: todo 7 · doing 2 · review 1
 
 🔀 Routing
@@ -511,7 +510,7 @@ Bloquant — pas de fallback silencieux.
 | CLAUDE.md DENSE v2.0 | Lookup framework table + tooling table |
 | `docs/GUIDE-UTILISATION.md` §4.5 | Match besoin → outil |
 | `skills/gsd/SKILL.md` §1 | Décisionnaire framework détaillé |
-| `project-state.xml` + Archon MCP | Inventory sources |
+| `project-state.xml` | Inventory sources |
 | `superpowers:dispatching-parallel-agents` | Backend wave parallèle |
 | `superpowers:using-git-worktrees` | Backend isolation worktree |
 | `superpowers:executing-plans` | Backend wave séquentielle |
@@ -553,7 +552,7 @@ Zéro duplication.
 ### Goal condition trop large
 
 ❌ "Finir toutes les tâches du projet" → évaluateur ne peut pas vérifier
-✅ "10 bugs identifiés review fixés (status=done dans Archon), tests pass, branch ready merge"
+✅ "10 bugs identifiés review fixés (status=done dans state.xml), tests pass, branch ready merge"
 
 ### Skip worktrees pour code parallèle
 
@@ -581,7 +580,7 @@ Zéro duplication.
 - Définir KPIs typés par tâche (au minimum validation)
 - Auto-confirm seulement avec `--auto` explicite
 - Cleanup worktrees post-wave
-- Sync state.xml + Archon post-wave
+- Sync state.xml post-wave
 
 ---
 

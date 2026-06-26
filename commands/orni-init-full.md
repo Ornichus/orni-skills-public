@@ -88,7 +88,7 @@ Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/
    **5b. Module UF (Update/Followup):**
    - Copier les 3 commandes + skill project-state-management/
    - Créer project-state.xml depuis template
-   - Configurer CLAUDE.md avec Archon Project ID (demander si création MCP)
+   - Configurer CLAUDE.md avec le Project ID (depuis project-state.xml)
    - Créer la structure _backup/
 
    **5c. Module AB (Agent Browser):**
@@ -193,7 +193,7 @@ Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/
      - Copier `skills/task-orchestrator/SKILL.md` dans `.claude/skills/task-orchestrator/`
      - Créer `.orchestrate/` (runtime state.json + kpis.yaml)
      - Ajouter `.orchestrate/` + `.worktrees/` à `.gitignore` si absents
-   - **Pré-requis** : UF installé + Archon configuré + project-state.xml présent
+   - **Pré-requis** : UF installé + project-state.xml présent
 
 6. **Mettre à jour le manifeste de versioning:**
    - Créer/mettre à jour `.claude/orni-manifest.json` avec une entrée pour chaque module installé
@@ -205,11 +205,11 @@ Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/
 
 7. **Rapport:**
    - Résumer tous les modules installés avec les options choisies
-   - Mentionner l'Archon Project ID configuré
+   - Mentionner le Project ID configuré (project-state.xml)
    - Rappeler les prochaines étapes:
      - `/setup-agent-browser` pour configurer WSL **SEULEMENT si le CLI n'est pas déjà configuré** (vérifié à l'étape 5c)
      - `/ateam suggest` pour composer une première équipe
-     - `/update` pour la première synchronisation Archon
+     - `/update` pour la première synchronisation de l'état projet
      - `/bmad-help` pour découvrir les commandes BMAD
 
 ---

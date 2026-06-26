@@ -18,7 +18,7 @@ Point d'entree pour consulter l'etat du projet. Propose 3 modes.
 
    | # | Mode | Description |
    |---|------|-------------|
-   | 1 | **State** | Archon MCP + project-state.xml (taches, objectifs, historique) |
+   | 1 | **State** | project-state.xml (taches, objectifs, historique) |
    | 2 | **PRD** | Etat de la documentation (PS, PRD, architecture.md, tags de statut) |
    | 3 | **Full** | State puis PRD |
 

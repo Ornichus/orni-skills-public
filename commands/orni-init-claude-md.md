@@ -6,7 +6,7 @@ description: 'Bootstrap CLAUDE.md projet standardisé Orni (template DENSE-POINT
 
 Génère ou augmente le `CLAUDE.md` du projet courant avec un template **DENSE-POINTEURS** qui oriente l'agent vers les bons outils + framework selon le contexte projet — avec un minimum de tokens et un maximum de pointeurs vers les sources canoniques.
 
-**Référence** : Archon task `9ae3f0db` (session 021, redesign v2.0 DENSE).
+**Référence** : redesign v2.0 DENSE (session 021).
 
 ## Principe de design
 
@@ -43,10 +43,10 @@ Lister (à des fins de rapport et notes éventuelles) les frameworks présents :
 
 **v2.0** : la détection sert **uniquement** à enrichir le rapport final + à pré-renseigner les notes "framework actif détecté dans ce projet" si pertinent. Le template DENSE liste les 4 cas de toute façon (décisionnaire neutre), donc pas de branchement conditionnel sur le contenu.
 
-### 4. Récupérer Archon Project ID
+### 4. Récupérer le Project ID
 
-- Chercher dans `CLAUDE.md` existant pattern `**Archon Project ID:** \`xxx-xxx-xxx\``
-- Si absent ou MODE SCAFFOLD : demander à l'utilisateur OU proposer création via Archon MCP
+- Chercher dans `CLAUDE.md` existant pattern `**Project ID:** \`xxx-xxx-xxx\``
+- Si absent ou MODE SCAFFOLD : demander à l'utilisateur OU générer un identifiant (stocké dans `project-state.xml`)
 
 ### 5. Récupérer info projet
 
@@ -83,7 +83,7 @@ Lister (à des fins de rapport et notes éventuelles) les frameworks présents :
 4. Substituer les placeholders dans le template DENSE :
    - `{{PROJECT_NAME}}` → nom projet (depuis dossier courant)
    - `{{PROJECT_SLUG}}` → slug projet (lowercase, kebab-case)
-   - `{{ARCHON_ID}}` → Archon ID (ou `non configuré`)
+   - `{{PROJECT_ID}}` → Project ID (depuis `project-state.xml`, ou `non configuré`)
    - `{{LAST_SYNC_DATE}}` → ISO 8601 maintenant
    - `{{ORNI_PATH}}` → `source_path` Orni-Skills résolu (e.g. `<VOTRE_DOSSIER>/orni-skills`)
    - `{{MODULES_TABLE_DENSE}}` → table modules format dense (voir step 7.5)
@@ -136,7 +136,7 @@ Ajouter/mettre à jour entrée `CLA` dans `.claude/orni-manifest.json` :
 
 **Mode** : {SCAFFOLD|AUGMENT}
 **Framework détecté** : {FRAMEWORK}
-**Archon ID** : {ID ou "non configuré"}
+**Project ID** : {ID ou "non configuré"}
 **Modules listés** : {N} ({liste codes})
 
 **Fichiers** :

@@ -8,9 +8,9 @@ Installe le skill `task-orchestrator` + commande `/orchestrate` dans le projet c
 
 ## Pré-requis
 
-- Projet a déjà `/orni-init-full` exécuté (au minimum UF + Archon configuré)
+- Projet a déjà `/orni-init-full` exécuté (au minimum UF installé)
 - `project-state.xml` présent
-- Archon Project ID configuré dans CLAUDE.md projet
+- Project ID configuré dans CLAUDE.md projet
 
 ## Instructions
 
