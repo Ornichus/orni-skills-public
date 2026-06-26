@@ -1,0 +1,35 @@
+{
+  "name": "web-pdf-compile",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Capture web articles as clean PDF dossiers grouped by country/category",
+  "license": "MIT",
+  "scripts": {
+    "probe": "node scripts/probe-dom.js",
+    "capture": "node scripts/capture.js",
+    "compile": "node scripts/compile-pdf.js",
+    "mcp": "node scripts/mcp-server.js"
+  },
+  "bin": {
+    "web-pdf-compile-mcp": "scripts/mcp-server.js"
+  },
+  "files": [
+    "scripts/",
+    "examples/",
+    "SKILL.md",
+    "README.md",
+    "PROTOCOLE.md",
+    "DISTRIBUTION.md",
+    "LICENSE",
+    "install.sh",
+    "install.bat"
+  ],
+  "dependencies": {
+    "puppeteer-core": "^24.0.0",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.34.0",
+    "@ghostery/adblocker-puppeteer": "^2.0.0",
+    "cross-fetch": "^4.0.0",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

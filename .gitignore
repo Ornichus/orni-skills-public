@@ -1,0 +1,36 @@
+# Dépendances (à réinstaller via npm install / pip install — jamais versionnées)
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Artefacts de build / sorties générées
+dist/
+build/
+output/
+generated-images/
+
+# Config locale Claude Code (secrets, surcharges machine — ne jamais committer)
+.claude/settings.local.json
+**/reprise-relais.json
+
+# Secrets / clés (sécurité)
+*.key
+*.pem
+.env
+.env.*
+**/cloudflare.json
+**/vps-config.json
+**/backend_keys.json
+
+# Système / éditeurs
+.DS_Store
+Thumbs.db
+*.log
+Temp/
+.ignore/

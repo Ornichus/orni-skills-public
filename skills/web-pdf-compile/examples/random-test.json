@@ -1,0 +1,71 @@
+{
+  "title": "Random Test — 3 articles divers",
+  "subtitle": "Validation auto-trim sur layouts variés",
+  "output_dir": "./output/random-test",
+  "country_order": [
+    { "code": "WW", "name": "Worldwide" }
+  ],
+  "sources": [
+    {
+      "id": "01",
+      "shortname": "wikipedia-photosynthesis",
+      "country": "WW",
+      "url": "https://en.wikipedia.org/wiki/Photosynthesis",
+      "selectors": ["#mw-content-text", "#content", "main"],
+      "extraRemove": [
+        "#mw-navigation",
+        "#footer",
+        ".mw-editsection",
+        ".navbox",
+        ".reflist",
+        ".infobox",
+        ".sidebar",
+        ".thumb-image",
+        "#siteSub",
+        ".vector-pinnable-element"
+      ],
+      "longwait": false,
+      "useHeuristic": false,
+      "source": null
+    },
+    {
+      "id": "02",
+      "shortname": "stackoverflow-blog",
+      "country": "WW",
+      "url": "https://stackoverflow.blog/2024/01/15/the-new-rules-of-engagement/",
+      "selectors": ["article", ".post-content", "main"],
+      "extraRemove": [
+        "header",
+        "footer",
+        "nav",
+        ".sidebar",
+        ".social-share",
+        ".comments-area",
+        ".related-posts",
+        ".newsletter-signup",
+        ".author-bio"
+      ],
+      "longwait": true,
+      "useHeuristic": true,
+      "source": null
+    },
+    {
+      "id": "03",
+      "shortname": "fsf-free-sw",
+      "country": "WW",
+      "url": "https://www.gnu.org/philosophy/free-sw.html",
+      "selectors": ["#content", "main", "article"],
+      "extraRemove": [
+        "#header",
+        "#footer",
+        "#navigation",
+        "#sidebar",
+        "#sisters",
+        "#mission-statement"
+      ],
+      "longwait": false,
+      "useHeuristic": false,
+      "source": null
+    }
+  ]
+}

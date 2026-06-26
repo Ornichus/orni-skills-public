@@ -1,0 +1,45 @@
+{
+  "title": "Exemple Compilation",
+  "subtitle": "Sous-titre",
+  "output_dir": "./output/example",
+  "skip_ids": [],
+  "country_order": [
+    { "code": "FR", "name": "France" },
+    { "code": "US", "name": "United States" },
+    { "code": "GB", "name": "United Kingdom" },
+    { "code": "DE", "name": "Germany" }
+  ],
+  "sources": [
+    {
+      "id": "01",
+      "shortname": "site-name",
+      "country": "FR",
+      "url": "https://example.com/article-url",
+      "selectors": [
+        "article .entry-content",
+        "article",
+        ".post-content"
+      ],
+      "extraRemove": [
+        ".comments-area",
+        ".sidebar",
+        ".related-posts",
+        ".author-bio",
+        ".sharedaddy"
+      ],
+      "longwait": false,
+      "useHeuristic": false,
+      "source": null
+    },
+    {
+      "id": "02",
+      "shortname": "wayback-example",
+      "country": "US",
+      "url": "https://web.archive.org/web/20240101/https://original-site.com/article",
+      "source": "wayback",
+      "longwait": true,
+      "selectors": ["article", ".article-content"],
+      "extraRemove": ["#wm-ipp-base", ".comments"]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 480" width="1030" height="480" font-family="'Segoe UI', system-ui, sans-serif" font-size="13">
+<rect x="0" y="0" width="1030" height="480" fill="#0f172a"/>
+<text x="180" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L1 dark</text>
+<text x="330" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L2 dark</text>
+<text x="480" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L3 dark</text>
+<text x="630" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L1 light</text>
+<text x="780" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L2 light</text>
+<text x="930" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">L3 light</text>
+<text x="100" y="74.0" fill="#e2e8f0" text-anchor="end" font-weight="700">blue (220°)</text>
+<rect x="110" y="40" width="140" height="60" rx="8" fill="#0b1427" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="180.0" y="68.0" fill="#a3bef4" text-anchor="middle" font-weight="700">#0b1427</text>
+<text x="180.0" y="84.0" fill="#a3bef4" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 55%, 10%)</text>
+<rect x="260" y="40" width="140" height="60" rx="8" fill="#1c2b49" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="330.0" y="68.0" fill="#a3bef4" text-anchor="middle" font-weight="700">#1c2b49</text>
+<text x="330.0" y="84.0" fill="#a3bef4" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 45%, 20%)</text>
+<rect x="410" y="40" width="140" height="60" rx="8" fill="#304672" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="480.0" y="68.0" fill="#a3bef4" text-anchor="middle" font-weight="700">#304672</text>
+<text x="480.0" y="84.0" fill="#a3bef4" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 40%, 32%)</text>
+<rect x="560" y="40" width="140" height="60" rx="8" fill="#dfe6f5" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="630.0" y="68.0" fill="#163a82" text-anchor="middle" font-weight="700">#dfe6f5</text>
+<text x="630.0" y="84.0" fill="#163a82" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 55%, 92%)</text>
+<rect x="710" y="40" width="140" height="60" rx="8" fill="#c7d3e9" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="780.0" y="68.0" fill="#163a82" text-anchor="middle" font-weight="700">#c7d3e9</text>
+<text x="780.0" y="84.0" fill="#163a82" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 45%, 85%)</text>
+<rect x="860" y="40" width="140" height="60" rx="8" fill="#a5b6d8" stroke="#3b71dc" stroke-width="1.5"/>
+<text x="930.0" y="68.0" fill="#163a82" text-anchor="middle" font-weight="700">#a5b6d8</text>
+<text x="930.0" y="84.0" fill="#163a82" text-anchor="middle" font-size="10" opacity="0.75">hsl(220, 40%, 75%)</text>
+<text x="100" y="144.0" fill="#e2e8f0" text-anchor="end" font-weight="700">violet (280°)</text>
+<rect x="110" y="110" width="140" height="60" rx="8" fill="#1e0b27" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="180.0" y="138.0" fill="#d9a3f4" text-anchor="middle" font-weight="700">#1e0b27</text>
+<text x="180.0" y="154.0" fill="#d9a3f4" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 55%, 10%)</text>
+<rect x="260" y="110" width="140" height="60" rx="8" fill="#3a1c49" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="330.0" y="138.0" fill="#d9a3f4" text-anchor="middle" font-weight="700">#3a1c49</text>
+<text x="330.0" y="154.0" fill="#d9a3f4" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 45%, 20%)</text>
+<rect x="410" y="110" width="140" height="60" rx="8" fill="#5c3072" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="480.0" y="138.0" fill="#d9a3f4" text-anchor="middle" font-weight="700">#5c3072</text>
+<text x="480.0" y="154.0" fill="#d9a3f4" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 40%, 32%)</text>
+<rect x="560" y="110" width="140" height="60" rx="8" fill="#eedff5" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="630.0" y="138.0" fill="#5e1682" text-anchor="middle" font-weight="700">#eedff5</text>
+<text x="630.0" y="154.0" fill="#5e1682" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 55%, 92%)</text>
+<rect x="710" y="110" width="140" height="60" rx="8" fill="#dec7e9" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="780.0" y="138.0" fill="#5e1682" text-anchor="middle" font-weight="700">#dec7e9</text>
+<text x="780.0" y="154.0" fill="#5e1682" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 45%, 85%)</text>
+<rect x="860" y="110" width="140" height="60" rx="8" fill="#c7a5d8" stroke="#a73bdc" stroke-width="1.5"/>
+<text x="930.0" y="138.0" fill="#5e1682" text-anchor="middle" font-weight="700">#c7a5d8</text>
+<text x="930.0" y="154.0" fill="#5e1682" text-anchor="middle" font-size="10" opacity="0.75">hsl(280, 40%, 75%)</text>
+<text x="100" y="214.0" fill="#e2e8f0" text-anchor="end" font-weight="700">red (340°)</text>
+<rect x="110" y="180" width="140" height="60" rx="8" fill="#270b14" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="180.0" y="208.0" fill="#f4a3be" text-anchor="middle" font-weight="700">#270b14</text>
+<text x="180.0" y="224.0" fill="#f4a3be" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 55%, 10%)</text>
+<rect x="260" y="180" width="140" height="60" rx="8" fill="#491c2b" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="330.0" y="208.0" fill="#f4a3be" text-anchor="middle" font-weight="700">#491c2b</text>
+<text x="330.0" y="224.0" fill="#f4a3be" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 45%, 20%)</text>
+<rect x="410" y="180" width="140" height="60" rx="8" fill="#723046" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="480.0" y="208.0" fill="#f4a3be" text-anchor="middle" font-weight="700">#723046</text>
+<text x="480.0" y="224.0" fill="#f4a3be" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 40%, 32%)</text>
+<rect x="560" y="180" width="140" height="60" rx="8" fill="#f5dfe6" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="630.0" y="208.0" fill="#82163a" text-anchor="middle" font-weight="700">#f5dfe6</text>
+<text x="630.0" y="224.0" fill="#82163a" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 55%, 92%)</text>
+<rect x="710" y="180" width="140" height="60" rx="8" fill="#e9c7d3" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="780.0" y="208.0" fill="#82163a" text-anchor="middle" font-weight="700">#e9c7d3</text>
+<text x="780.0" y="224.0" fill="#82163a" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 45%, 85%)</text>
+<rect x="860" y="180" width="140" height="60" rx="8" fill="#d8a5b6" stroke="#dc3b71" stroke-width="1.5"/>
+<text x="930.0" y="208.0" fill="#82163a" text-anchor="middle" font-weight="700">#d8a5b6</text>
+<text x="930.0" y="224.0" fill="#82163a" text-anchor="middle" font-size="10" opacity="0.75">hsl(340, 40%, 75%)</text>
+<text x="100" y="284.0" fill="#e2e8f0" text-anchor="end" font-weight="700">orange (40°)</text>
+<rect x="110" y="250" width="140" height="60" rx="8" fill="#271e0b" stroke="#dca73b" stroke-width="1.5"/>
+<text x="180.0" y="278.0" fill="#f4d9a3" text-anchor="middle" font-weight="700">#271e0b</text>
+<text x="180.0" y="294.0" fill="#f4d9a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 55%, 10%)</text>
+<rect x="260" y="250" width="140" height="60" rx="8" fill="#493a1c" stroke="#dca73b" stroke-width="1.5"/>
+<text x="330.0" y="278.0" fill="#f4d9a3" text-anchor="middle" font-weight="700">#493a1c</text>
+<text x="330.0" y="294.0" fill="#f4d9a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 45%, 20%)</text>
+<rect x="410" y="250" width="140" height="60" rx="8" fill="#725c30" stroke="#dca73b" stroke-width="1.5"/>
+<text x="480.0" y="278.0" fill="#f4d9a3" text-anchor="middle" font-weight="700">#725c30</text>
+<text x="480.0" y="294.0" fill="#f4d9a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 40%, 32%)</text>
+<rect x="560" y="250" width="140" height="60" rx="8" fill="#f5eedf" stroke="#dca73b" stroke-width="1.5"/>
+<text x="630.0" y="278.0" fill="#825e16" text-anchor="middle" font-weight="700">#f5eedf</text>
+<text x="630.0" y="294.0" fill="#825e16" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 55%, 92%)</text>
+<rect x="710" y="250" width="140" height="60" rx="8" fill="#e9dec7" stroke="#dca73b" stroke-width="1.5"/>
+<text x="780.0" y="278.0" fill="#825e16" text-anchor="middle" font-weight="700">#e9dec7</text>
+<text x="780.0" y="294.0" fill="#825e16" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 45%, 85%)</text>
+<rect x="860" y="250" width="140" height="60" rx="8" fill="#d8c7a5" stroke="#dca73b" stroke-width="1.5"/>
+<text x="930.0" y="278.0" fill="#825e16" text-anchor="middle" font-weight="700">#d8c7a5</text>
+<text x="930.0" y="294.0" fill="#825e16" text-anchor="middle" font-size="10" opacity="0.75">hsl(40, 40%, 75%)</text>
+<text x="100" y="354.0" fill="#e2e8f0" text-anchor="end" font-weight="700">green (100°)</text>
+<rect x="110" y="320" width="140" height="60" rx="8" fill="#14270b" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="180.0" y="348.0" fill="#bef4a3" text-anchor="middle" font-weight="700">#14270b</text>
+<text x="180.0" y="364.0" fill="#bef4a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 55%, 10%)</text>
+<rect x="260" y="320" width="140" height="60" rx="8" fill="#2b491c" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="330.0" y="348.0" fill="#bef4a3" text-anchor="middle" font-weight="700">#2b491c</text>
+<text x="330.0" y="364.0" fill="#bef4a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 45%, 20%)</text>
+<rect x="410" y="320" width="140" height="60" rx="8" fill="#467230" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="480.0" y="348.0" fill="#bef4a3" text-anchor="middle" font-weight="700">#467230</text>
+<text x="480.0" y="364.0" fill="#bef4a3" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 40%, 32%)</text>
+<rect x="560" y="320" width="140" height="60" rx="8" fill="#e6f5df" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="630.0" y="348.0" fill="#3a8216" text-anchor="middle" font-weight="700">#e6f5df</text>
+<text x="630.0" y="364.0" fill="#3a8216" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 55%, 92%)</text>
+<rect x="710" y="320" width="140" height="60" rx="8" fill="#d3e9c7" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="780.0" y="348.0" fill="#3a8216" text-anchor="middle" font-weight="700">#d3e9c7</text>
+<text x="780.0" y="364.0" fill="#3a8216" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 45%, 85%)</text>
+<rect x="860" y="320" width="140" height="60" rx="8" fill="#b6d8a5" stroke="#71dc3b" stroke-width="1.5"/>
+<text x="930.0" y="348.0" fill="#3a8216" text-anchor="middle" font-weight="700">#b6d8a5</text>
+<text x="930.0" y="364.0" fill="#3a8216" text-anchor="middle" font-size="10" opacity="0.75">hsl(100, 40%, 75%)</text>
+<text x="100" y="424.0" fill="#e2e8f0" text-anchor="end" font-weight="700">cyan (160°)</text>
+<rect x="110" y="390" width="140" height="60" rx="8" fill="#0b271e" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="180.0" y="418.0" fill="#a3f4d9" text-anchor="middle" font-weight="700">#0b271e</text>
+<text x="180.0" y="434.0" fill="#a3f4d9" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 55%, 10%)</text>
+<rect x="260" y="390" width="140" height="60" rx="8" fill="#1c493a" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="330.0" y="418.0" fill="#a3f4d9" text-anchor="middle" font-weight="700">#1c493a</text>
+<text x="330.0" y="434.0" fill="#a3f4d9" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 45%, 20%)</text>
+<rect x="410" y="390" width="140" height="60" rx="8" fill="#30725c" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="480.0" y="418.0" fill="#a3f4d9" text-anchor="middle" font-weight="700">#30725c</text>
+<text x="480.0" y="434.0" fill="#a3f4d9" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 40%, 32%)</text>
+<rect x="560" y="390" width="140" height="60" rx="8" fill="#dff5ee" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="630.0" y="418.0" fill="#16825e" text-anchor="middle" font-weight="700">#dff5ee</text>
+<text x="630.0" y="434.0" fill="#16825e" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 55%, 92%)</text>
+<rect x="710" y="390" width="140" height="60" rx="8" fill="#c7e9de" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="780.0" y="418.0" fill="#16825e" text-anchor="middle" font-weight="700">#c7e9de</text>
+<text x="780.0" y="434.0" fill="#16825e" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 45%, 85%)</text>
+<rect x="860" y="390" width="140" height="60" rx="8" fill="#a5d8c7" stroke="#3bdca7" stroke-width="1.5"/>
+<text x="930.0" y="418.0" fill="#16825e" text-anchor="middle" font-weight="700">#a5d8c7</text>
+<text x="930.0" y="434.0" fill="#16825e" text-anchor="middle" font-size="10" opacity="0.75">hsl(160, 40%, 75%)</text>
+</svg>

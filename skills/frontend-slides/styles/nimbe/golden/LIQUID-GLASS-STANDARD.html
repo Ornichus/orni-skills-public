@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid-Glass Standard — Nimbe</title>
+<style>
+/* ============================================================
+   Nimbe — LIQUID-GLASS STANDARD (proto à valider)
+   Source unique de vérité du verre. Tout passe par .lg.
+   Light par défaut + toggle dark + mode édition.
+   ============================================================ */
+:root{
+  /* Brand */
+  --nimbe-blue:#0027a3; --nimbe-red:#a1140e;
+  --ink:#0d1430; --ink-soft:#41496b; --muted:#7a82a0;
+
+  /* Glass token system (LIGHT) — la SEULE def du verre */
+  --glass-tint: 255 255 255;            /* base RGB du verre */
+  --glass-bg: rgb(var(--glass-tint) / .55);
+  --glass-bg-2: rgb(var(--glass-tint) / .35);
+  --glass-blur: 22px;
+  --glass-sat: 180%;
+  --glass-radius: 22px;
+  --glass-border: rgb(var(--glass-tint) / .8);
+  --glass-edge: rgb(255 255 255 / .9);   /* reflet spéculaire haut */
+  --glass-shadow:
+     0 1px 0 rgb(255 255 255 / .7) inset,        /* halo interne haut */
+     0 -1px 1px rgb(13 20 48 / .04) inset,        /* ombre interne bas */
+     0 18px 40px -12px rgb(13 20 48 / .22),       /* ombre portée douce */
+     0 4px 12px -6px rgb(13 20 48 / .18);
+  --sheen: rgb(255 255 255 / .35);
+
+  --space: clamp(14px, 2.2vw, 26px);
+  --bg-1:#eaf0ff; --bg-2:#fdeceb; --bg-3:#f4f6ff;
+}
+[data-theme="dark"]{
+  --ink:#eaf0ff; --ink-soft:#aab3d6; --muted:#7e88b3;
+  --glass-tint: 18 26 56;
+  --glass-bg: rgb(var(--glass-tint) / .55);
+  --glass-bg-2: rgb(var(--glass-tint) / .35);
+  --glass-border: rgb(120 140 220 / .35);
+  --glass-edge: rgb(150 175 255 / .5);
+  --glass-shadow:
+     0 1px 0 rgb(150 175 255 / .25) inset,
+     0 -1px 1px rgb(0 0 0 / .3) inset,
+     0 18px 44px -12px rgb(0 0 0 / .55),
+     0 4px 12px -6px rgb(0 0 0 / .4);
+  --sheen: rgb(180 200 255 / .22);
+  --bg-1:#0a1030; --bg-2:#1a0a1e; --bg-3:#070b22;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Outfit","DM Sans",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(60% 50% at 12% 8%, var(--bg-1), transparent 60%),
+    radial-gradient(55% 45% at 92% 18%, var(--bg-2), transparent 55%),
+    var(--bg-3);
+  min-height:100vh; padding:clamp(20px,4vw,56px);
+  transition:background .5s ease,color .35s ease;
+}
+/* grain global anti-banding */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:.035; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===================== LE VERRE : .lg ===================== */
+.lg{
+  position:relative;
+  background:linear-gradient(160deg, var(--glass-bg), var(--glass-bg-2));
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border:1px solid var(--glass-border);
+  border-radius:var(--glass-radius);
+  box-shadow:var(--glass-shadow);
+  overflow:hidden;
+}
+/* reflet spéculaire : arête haute qui accroche la lumière */
+.lg::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(160deg, var(--glass-edge), transparent 32%);
+  opacity:.7; mix-blend-mode:screen;
+}
+/* sheen mobile au survol */
+.lg.interactive::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:radial-gradient(120px 120px at var(--mx,50%) var(--my,0%), var(--sheen), transparent 60%);
+  opacity:0; transition:opacity .4s ease;
+}
+.lg.interactive:hover::after{opacity:1}
+.lg.interactive{transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s}
+.lg.interactive:hover{transform:translateY(-3px)}
+
+/* layout */
+.wrap{max-width:1100px;margin:0 auto;display:grid;gap:var(--space)}
+.row{display:grid;gap:var(--space)}
+@media(min-width:760px){.cols-3{grid-template-columns:repeat(3,1fr)}.cols-2{grid-template-columns:1fr 1fr}}
+.pad{padding:clamp(18px,2.4vw,30px)}
+
+.eyebrow{font:600 12px/1 "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--nimbe-blue)}
+.eyebrow.red{color:var(--nimbe-red)}
+h1{font-weight:700;font-size:clamp(28px,4.6vw,52px);letter-spacing:-.02em;line-height:1.04;margin:.4em 0 .2em}
+h3{font-weight:650;font-size:clamp(17px,2vw,21px);margin-bottom:.5em}
+p{color:var(--ink-soft);line-height:1.5;font-size:clamp(14px,1.4vw,16px)}
+.lead{font-size:clamp(15px,1.6vw,18px)}
+
+/* KPI glass */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi{padding:18px}
+.kpi .num{font-weight:750;font-size:clamp(24px,3.4vw,38px);
+  background:linear-gradient(120deg,var(--nimbe-blue),var(--nimbe-red));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi .lbl{font:600 11px/1.2 "JetBrains Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+
+/* boutons verre */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:14px;
+  font:600 14px/1 "Outfit",sans-serif;cursor:pointer;color:var(--ink);
+  background:linear-gradient(160deg,var(--glass-bg),var(--glass-bg-2));
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);
+  border:1px solid var(--glass-border);box-shadow:0 1px 0 var(--glass-edge) inset,0 8px 18px -8px rgb(13 20 48 /.25);
+  transition:transform .2s, box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{color:#fff;background:linear-gradient(160deg,var(--nimbe-blue),#0019 70%)}
+
+/* expandable → overlay */
+.expandable{cursor:pointer}
+.expandable .arrow{float:right;color:var(--nimbe-blue);transition:transform .25s}
+.expandable:hover .arrow{transform:translate(3px,-3px)}
+
+/* lexique inline */
+.lex-term{border-bottom:1.5px dotted var(--nimbe-blue);cursor:help;font-weight:600;position:relative}
+.lex-tip{position:fixed;z-index:200;max-width:280px;padding:14px 16px;border-radius:16px;display:none}
+.lex-tip h4{font-size:13px;color:var(--nimbe-blue);margin-bottom:4px}
+.lex-tip p{font-size:13px}
+
+/* slider paramétrique */
+.param{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.param input[type=range]{flex:1;min-width:160px;accent-color:var(--nimbe-blue)}
+.param .out{font-weight:750;font-size:clamp(20px,2.6vw,30px);
+  background:linear-gradient(120deg,var(--nimbe-blue),var(--nimbe-red));-webkit-background-clip:text;background-clip:text;color:transparent;min-width:7ch;text-align:right}
+
+/* overlay glass */
+.overlay{position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:5vw;
+  background:rgb(8 12 30 /.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.overlay.open{display:grid;animation:fade .3s ease}
+.overlay .panel{max-width:640px;width:100%;padding:30px;transform:scale(.96);animation:pop .35s cubic-bezier(.2,.9,.3,1.2) forwards}
+@keyframes fade{from{opacity:0}}@keyframes pop{to{transform:scale(1)}}
+.overlay .close{position:absolute;top:18px;right:22px;font-size:26px;cursor:pointer;border:none;background:none;color:var(--ink)}
+
+/* toolbar */
+.toolbar{position:fixed;top:16px;right:16px;z-index:400;display:flex;gap:8px}
+.toolbar .btn{padding:9px 13px;font-size:13px}
+[data-edit="on"] [data-editable]{outline:1.5px dashed var(--nimbe-blue);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn" id="themeBtn">☀︎ Light</button>
+  <button class="btn" id="editBtn">✎ Édition</button>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow" data-editable>Liquid-Glass Standard · v2 proto</span>
+    <h1 data-editable>Le verre, refait proprement.</h1>
+    <p class="lead" data-editable>Une seule source de vérité <span class="lex-term" data-term="glass">glass</span> — reflet spéculaire, saturation du fond, ombres en couches, grain anti-banding, sheen au survol. Tout passe par <code>.lg</code>.</p>
+  </header>
+
+  <!-- KPI -->
+  <section class="lg interactive pad">
+    <h3 data-editable>KPI-glass standardisés</h3>
+    <div class="kpi-grid">
+      <div class="lg kpi"><div class="num" data-editable>180%</div><div class="lbl">Saturation fond</div></div>
+      <div class="lg kpi"><div class="num" data-editable>22px</div><div class="lbl">Blur de référence</div></div>
+      <div class="lg kpi"><div class="num" data-editable>1</div><div class="lbl">Source de vérité</div></div>
+    </div>
+  </section>
+
+  <div class="row cols-2">
+    <!-- expandable -> overlay -->
+    <section class="lg interactive pad expandable" data-overlay="detail">
+      <span class="arrow">↗</span>
+      <h3 data-editable>Slide synthèse → clic → détail</h3>
+      <p data-editable>La carte reste épurée (1 idée). Le détail dense part en overlay glass au clic. Indicateur ↗ obligatoire.</p>
+    </section>
+
+    <!-- param -->
+    <section class="lg interactive pad">
+      <h3 data-editable>Variable dynamique</h3>
+      <div class="param">
+        <input type="range" id="roi" min="1" max="5" value="3" step="1">
+        <span class="out"><span id="roiOut">+9,4</span> M€</span>
+      </div>
+      <p style="margin-top:8px" data-editable>Bouge le curseur (année) → la projection se recalcule en direct.</p>
+    </section>
+  </div>
+
+  <div class="row" style="grid-auto-flow:column;justify-content:start;gap:12px">
+    <button class="btn primary" data-overlay="detail">Ouvrir un overlay</button>
+    <button class="btn" id="darkPeek">Aperçu dark</button>
+  </div>
+
+</div>
+
+<!-- overlay -->
+<div class="overlay" id="ov-detail">
+  <div class="lg panel">
+    <button class="close" aria-label="Fermer">×</button>
+    <span class="eyebrow">Détail</span>
+    <h3 style="margin-top:6px">Vue détaillée à la demande</h3>
+    <p>Ici on met la profondeur : tableaux, preuves, constitution d'un module — sans alourdir la slide principale. Focus-trap + Échap + clic fond pour fermer.</p>
+  </div>
+</div>
+
+<div class="lg pad lex-tip" id="lexTip"><h4></h4><p></p></div>
+
+<script>
+const LEX={glass:{title:"Liquid glass",def:"Surface translucide qui floute + sature le fond, avec reflet spéculaire sur l'arête. Effet de verre dépoli vivant."}};
+// theme
+const tb=document.getElementById('themeBtn');
+function setTheme(t){document.documentElement.dataset.theme=t;tb.textContent=t==='light'?'☀︎ Light':'☾ Dark';}
+tb.onclick=()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light');
+document.getElementById('darkPeek').onclick=()=>setTheme('dark');
+// edit
+const eb=document.getElementById('editBtn');
+eb.onclick=()=>{const on=document.documentElement.dataset.edit==='on';document.documentElement.dataset.edit=on?'off':'on';document.querySelectorAll('[data-editable]').forEach(e=>e.contentEditable=!on);eb.textContent=on?'✎ Édition':'✓ Éditer';};
+// sheen
+document.querySelectorAll('.lg.interactive').forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px');}));
+// param
+const roi=document.getElementById('roi'),roiOut=document.getElementById('roiOut');
+const map={1:'-2,1',2:'+3,6',3:'+9,4',4:'+14,2',5:'+18,9'};
+roi.oninput=()=>roiOut.textContent=map[roi.value];
+// overlay
+const ov=document.getElementById('ov-detail');
+document.querySelectorAll('[data-overlay]').forEach(t=>t.addEventListener('click',()=>ov.classList.add('open')));
+ov.querySelector('.close').onclick=()=>ov.classList.remove('open');
+ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')ov.classList.remove('open')});
+// lexique
+const tip=document.getElementById('lexTip');
+document.querySelectorAll('.lex-term').forEach(t=>t.addEventListener('click',e=>{const d=LEX[t.dataset.term];if(!d)return;tip.querySelector('h4').textContent=d.title;tip.querySelector('p').textContent=d.def;tip.style.display='block';tip.style.left=Math.min(e.clientX,innerWidth-300)+'px';tip.style.top=(e.clientY+16)+'px';}));
+document.addEventListener('click',e=>{if(!e.target.classList.contains('lex-term'))tip.style.display='none'});
+</script>
+</body>
+</html>

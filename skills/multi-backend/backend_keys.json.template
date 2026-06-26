@@ -1,0 +1,5 @@
+{
+  "_comment": "Copy this file to ~/.claude/backend_keys.json (DO NOT commit). Fill the OR key.",
+  "_doc": "Read by ~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1 odsp function. Get OR key at https://openrouter.ai/keys",
+  "openrouter_key": "sk-or-v1-REPLACE_WITH_YOUR_OPENROUTER_API_KEY"
+}

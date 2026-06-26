@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nimbe — Standard du verre</title>
+<style>
+/* ============================================================
+   Nimbe — STYLE « NIMBE » · Standard du verre
+   (ex « Liquid-Glass v2 »). Matière colorée DERRIÈRE le verre
+   → le flou réfracte. Reflet + bord renforcés. Light par défaut.
+   ============================================================ */
+:root{
+  --nimbe-blue:#0027a3; --nimbe-red:#a1140e; --nimbe-violet:#5b3ff0; --nimbe-cyan:#16b6c9;
+  --nimbe-gold:#b88407; --nimbe-green:#1f8f57;
+  --ink:#0d1430; --ink-soft:#39406a; --muted:#6f779c;
+  /* Tokens texte dual-theme — foncés en light (lisibles sur verre clair) */
+  --c-blue:#0027a3; --c-red:#a1140e; --c-violet:#4a2fd6; --c-cyan:#0f8896; --c-gold:#8a6205; --c-green:#15703f;
+
+  --glass-tint: 255 255 255;
+  --glass-bg: rgb(var(--glass-tint) / .46);
+  --glass-bg-2: rgb(var(--glass-tint) / .20);
+  --glass-blur: 20px;
+  --glass-sat: 195%;
+  --glass-radius: 22px;
+  --glass-border: rgb(var(--glass-tint) / .85);
+  --glass-edge: rgb(255 255 255 / 1);
+  --glass-shadow:
+     0 1.5px 0 rgb(255 255 255 / .95) inset,
+     0 -1px 1px rgb(13 20 48 / .05) inset,
+     0 22px 50px -16px rgb(13 20 48 / .30),
+     0 6px 16px -8px rgb(13 20 48 / .20),
+     0 0 0 1px rgb(255 255 255 / .25);
+  --sheen: rgb(255 255 255 / .55);
+
+  --space: clamp(14px, 2.2vw, 26px);
+}
+[data-theme="dark"]{
+  --ink:#eaf0ff; --ink-soft:#aab3d6; --muted:#7e88b3;
+  /* --c-* clairs en dark (lisibles sur verre sombre) */
+  --c-blue:#7ea0ff; --c-red:#ff9c93; --c-violet:#b3a0ff; --c-cyan:#5fe0ee; --c-gold:#ffd166; --c-green:#74e0a3;
+  --glass-tint: 18 26 56;
+  --glass-bg: rgb(var(--glass-tint) / .42);
+  --glass-bg-2: rgb(var(--glass-tint) / .18);
+  --glass-sat: 175%;
+  --glass-border: rgb(140 165 255 / .4);
+  --glass-edge: rgb(170 195 255 / .65);
+  --glass-shadow:
+     0 1.5px 0 rgb(170 195 255 / .35) inset,
+     0 -1px 1px rgb(0 0 0 / .35) inset,
+     0 24px 54px -16px rgb(0 0 0 / .6),
+     0 6px 16px -8px rgb(0 0 0 / .45);
+  --sheen: rgb(180 200 255 / .3);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Outfit","DM Sans",system-ui,sans-serif;
+  color:var(--ink);
+  background:#eef2fb;
+  min-height:100vh; padding:clamp(20px,4vw,56px); position:relative; overflow-x:hidden;
+}
+[data-theme="dark"] body{background:#070b22}
+
+/* ===== MATIÈRE derrière le verre : blobs colorés + grille ===== */
+.bg-decor{position:fixed;inset:-10%;z-index:-2;pointer-events:none;filter:saturate(92%)}
+.blob{position:absolute;border-radius:50%;filter:blur(84px);opacity:.30;mix-blend-mode:normal;animation:float 18s ease-in-out infinite}
+.blob.b1{width:46vw;height:46vw;left:-6vw;top:-8vw;background:radial-gradient(circle,var(--nimbe-blue),transparent 68%)}
+.blob.b2{width:40vw;height:40vw;right:-6vw;top:-2vw;background:radial-gradient(circle,var(--nimbe-red),transparent 66%);opacity:.22;animation-delay:-6s}
+.blob.b3{width:50vw;height:50vw;left:18vw;bottom:-22vw;background:radial-gradient(circle,var(--nimbe-violet),transparent 70%);opacity:.22;animation-delay:-3s}
+.blob.b4{width:30vw;height:30vw;right:8vw;bottom:-6vw;background:radial-gradient(circle,var(--nimbe-cyan),transparent 68%);opacity:.22;animation-delay:-9s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(2vw,-2vw) scale(1.06)}}
+.grid-ov{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgb(13 20 48 /.04) 1px,transparent 1px),linear-gradient(90deg,rgb(13 20 48 /.04) 1px,transparent 1px);
+  background-size:46px 46px;-webkit-mask-image:radial-gradient(80% 70% at 50% 35%,#000,transparent)}
+[data-theme="dark"] .grid-ov{background-image:linear-gradient(rgb(150 175 255 /.06) 1px,transparent 1px),linear-gradient(90deg,rgb(150 175 255 /.06) 1px,transparent 1px)}
+/* grain */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ===================== LE VERRE v2 : .lg ===================== */
+.lg{
+  position:relative;
+  background:linear-gradient(155deg, var(--glass-bg), var(--glass-bg-2));
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat)) brightness(1.04);
+  backdrop-filter:blur(var(--glass-blur)) saturate(var(--glass-sat)) brightness(1.04);
+  border:1px solid var(--glass-border);
+  border-radius:var(--glass-radius);
+  box-shadow:var(--glass-shadow);
+  overflow:hidden;
+}
+/* reflet spéculaire renforcé : arête + diagonale */
+.lg::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    linear-gradient(150deg, var(--glass-edge), transparent 24%),
+    linear-gradient(to bottom right, rgb(255 255 255 /.4), transparent 40%);
+  opacity:.8;mix-blend-mode:screen;
+}
+.lg.interactive::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(160px 160px at var(--mx,50%) var(--my,0%), var(--sheen), transparent 60%);
+  opacity:0;transition:opacity .4s ease;mix-blend-mode:screen;
+}
+.lg.interactive:hover::after{opacity:1}
+.lg.interactive{transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s}
+.lg.interactive:hover{transform:translateY(-3px)}
+
+/* layout */
+.wrap{max-width:1100px;margin:0 auto;display:grid;gap:var(--space);position:relative;z-index:1}
+.row{display:grid;gap:var(--space)}
+@media(min-width:760px){.cols-2{grid-template-columns:1fr 1fr}}
+.pad{padding:clamp(18px,2.4vw,30px)}
+
+.eyebrow{font:600 12px/1 "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--nimbe-blue)}
+h1{font-weight:700;font-size:clamp(28px,4.6vw,52px);letter-spacing:-.02em;line-height:1.04;margin:.4em 0 .2em}
+h3{font-weight:650;font-size:clamp(17px,2vw,21px);margin-bottom:.5em}
+p{color:var(--ink-soft);line-height:1.5;font-size:clamp(14px,1.4vw,16px)}
+.lead{font-size:clamp(15px,1.6vw,18px)}
+code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:rgb(13 20 48 /.06);padding:1px 6px;border-radius:6px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi{padding:18px}
+.kpi .num{font-weight:750;font-size:clamp(24px,3.4vw,38px);background:linear-gradient(120deg,var(--nimbe-blue),var(--nimbe-red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi .lbl{font:600 11px/1.2 "JetBrains Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:14px;font:600 14px/1 "Outfit",sans-serif;cursor:pointer;color:var(--ink);
+  background:linear-gradient(155deg,var(--glass-bg),var(--glass-bg-2));-webkit-backdrop-filter:blur(12px) saturate(170%);backdrop-filter:blur(12px) saturate(170%);
+  border:1px solid var(--glass-border);box-shadow:0 1.5px 0 var(--glass-edge) inset,0 8px 18px -8px rgb(13 20 48 /.28);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{color:#fff;background:linear-gradient(150deg,var(--nimbe-blue),#001a6e)}
+
+.expandable{cursor:pointer}
+.expandable .arrow{float:right;color:var(--nimbe-blue);transition:transform .25s}
+.expandable:hover .arrow{transform:translate(3px,-3px)}
+.lex-term{border-bottom:1.5px dotted var(--nimbe-blue);cursor:help;font-weight:600}
+.lex-tip{position:fixed;z-index:200;max-width:280px;padding:14px 16px;border-radius:16px;display:none}
+.lex-tip h4{font-size:13px;color:var(--nimbe-blue);margin-bottom:4px}.lex-tip p{font-size:13px}
+.param{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.param input[type=range]{flex:1;min-width:160px;accent-color:var(--nimbe-blue)}
+.param .out{font-weight:750;font-size:clamp(20px,2.6vw,30px);background:linear-gradient(120deg,var(--nimbe-blue),var(--nimbe-red));-webkit-background-clip:text;background-clip:text;color:transparent;min-width:7ch;text-align:right}
+
+.overlay{position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:5vw;background:rgb(8 12 30 /.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.overlay.open{display:grid;animation:fade .3s ease}
+.overlay .panel{max-width:640px;width:100%;padding:30px;transform:scale(.96);animation:pop .35s cubic-bezier(.2,.9,.3,1.2) forwards}
+@keyframes fade{from{opacity:0}}@keyframes pop{to{transform:scale(1)}}
+.overlay .close{position:absolute;top:18px;right:22px;font-size:26px;cursor:pointer;border:none;background:none;color:var(--ink)}
+.toolbar{position:fixed;top:16px;right:16px;z-index:400;display:flex;gap:8px}
+.toolbar .btn{padding:9px 13px;font-size:13px}
+[data-edit="on"] [data-editable]{outline:1.5px dashed var(--nimbe-blue);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="bg-decor"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></div>
+<div class="grid-ov"></div>
+
+<div class="toolbar">
+  <button class="btn" id="themeBtn">☀︎ Light</button>
+  <button class="btn" id="editBtn">✎ Édition</button>
+</div>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow" data-editable>Liquid-Glass Standard · v2 poussé</span>
+    <h1 data-editable>Le verre, qui réfracte enfin.</h1>
+    <p class="lead" data-editable>Matière colorée <span class="lex-term" data-term="glass">derrière</span> le verre → le flou la capte. Reflet spéculaire + bord renforcés. Toujours une seule source : <code>.lg</code>.</p>
+  </header>
+
+  <section class="lg interactive pad">
+    <h3 data-editable>KPI-glass standardisés</h3>
+    <div class="kpi-grid">
+      <div class="lg kpi"><div class="num" data-editable>195%</div><div class="lbl">Saturation fond</div></div>
+      <div class="lg kpi"><div class="num" data-editable>20px</div><div class="lbl">Blur de référence</div></div>
+      <div class="lg kpi"><div class="num" data-editable>1</div><div class="lbl">Source de vérité</div></div>
+    </div>
+  </section>
+
+  <div class="row cols-2">
+    <section class="lg interactive pad expandable" data-overlay="detail">
+      <span class="arrow">↗</span>
+      <h3 data-editable>Slide synthèse → clic → détail</h3>
+      <p data-editable>La carte reste épurée (1 idée). Le détail dense part en overlay glass au clic. Indicateur ↗ obligatoire.</p>
+    </section>
+    <section class="lg interactive pad">
+      <h3 data-editable>Variable dynamique</h3>
+      <div class="param">
+        <input type="range" id="roi" min="1" max="5" value="3" step="1">
+        <span class="out"><span id="roiOut">+9,4</span> M€</span>
+      </div>
+      <p style="margin-top:8px" data-editable>Bouge le curseur (année) → la projection se recalcule en direct.</p>
+    </section>
+  </div>
+
+  <div class="row" style="grid-auto-flow:column;justify-content:start;gap:12px">
+    <button class="btn primary" data-overlay="detail">Ouvrir un overlay</button>
+    <button class="btn" id="darkPeek">Aperçu dark</button>
+  </div>
+</div>
+
+<div class="overlay" id="ov-detail">
+  <div class="lg panel">
+    <button class="close" aria-label="Fermer">×</button>
+    <span class="eyebrow">Détail</span>
+    <h3 style="margin-top:6px">Vue détaillée à la demande</h3>
+    <p>Profondeur ici : tableaux, preuves, constitution d'un module — sans alourdir la slide. Focus-trap + Échap + clic fond pour fermer.</p>
+  </div>
+</div>
+<div class="lg pad lex-tip" id="lexTip"><h4></h4><p></p></div>
+
+<script>
+const LEX={glass:{title:"Liquid glass",def:"Surface translucide qui floute + sature le fond coloré derrière elle, avec reflet spéculaire sur l'arête. Verre dépoli vivant."}};
+const tb=document.getElementById('themeBtn');
+function setTheme(t){document.documentElement.dataset.theme=t;tb.textContent=t==='light'?'☀︎ Light':'☾ Dark';}
+tb.onclick=()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light');
+document.getElementById('darkPeek').onclick=()=>setTheme('dark');
+const eb=document.getElementById('editBtn');
+eb.onclick=()=>{const on=document.documentElement.dataset.edit==='on';document.documentElement.dataset.edit=on?'off':'on';document.querySelectorAll('[data-editable]').forEach(e=>e.contentEditable=!on);eb.textContent=on?'✎ Édition':'✓ Éditer';};
+document.querySelectorAll('.lg.interactive').forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px');}));
+const roi=document.getElementById('roi'),roiOut=document.getElementById('roiOut'),map={1:'-2,1',2:'+3,6',3:'+9,4',4:'+14,2',5:'+18,9'};
+roi.oninput=()=>roiOut.textContent=map[roi.value];
+const ov=document.getElementById('ov-detail');
+document.querySelectorAll('[data-overlay]').forEach(t=>t.addEventListener('click',()=>ov.classList.add('open')));
+ov.querySelector('.close').onclick=()=>ov.classList.remove('open');
+ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')ov.classList.remove('open')});
+const tip=document.getElementById('lexTip');
+document.querySelectorAll('.lex-term').forEach(t=>t.addEventListener('click',e=>{const d=LEX[t.dataset.term];if(!d)return;tip.querySelector('h4').textContent=d.title;tip.querySelector('p').textContent=d.def;tip.style.display='block';tip.style.left=Math.min(e.clientX,innerWidth-300)+'px';tip.style.top=(e.clientY+16)+'px';}));
+document.addEventListener('click',e=>{if(!e.target.classList.contains('lex-term'))tip.style.display='none'});
+</script>
+</body>
+</html>

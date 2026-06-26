@@ -1,0 +1,15 @@
+{
+  "project": "PROJECT_SLUG",
+  "current": {
+    "snapshot_date": null,
+    "session": null,
+    "phase": null,
+    "question": null,
+    "summary": null,
+    "decisions": [],
+    "next_actions": [],
+    "blockers": [],
+    "metrics": {}
+  },
+  "history": []
+}

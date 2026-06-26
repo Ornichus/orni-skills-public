@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" font-family="'Segoe UI', system-ui, sans-serif" font-size="18">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect x="30" y="30" width="940" height="290" rx="10" fill="#0b1427" stroke="#3b71dc" stroke-width="1.5"/>
+  <rect x="110" y="70" width="140" height="50" rx="8" fill="#1c2b49" stroke="#3b71dc" stroke-width="1.5"/>
+  <text x="180" y="101" fill="#e2e8f0" text-anchor="middle">Etape 1</text>
+  <rect x="270" y="70" width="140" height="50" rx="8" fill="#2b491c" stroke="#71dc3b" stroke-width="1.5"/>
+  <text x="340" y="101" fill="#e2e8f0" text-anchor="middle">Etape 2</text>
+  <rect x="430" y="70" width="140" height="50" rx="8" fill="#3a1c49" stroke="#a73bdc" stroke-width="1.5"/>
+  <text x="500" y="101" fill="#e2e8f0" text-anchor="middle">Etape 3</text>
+  <rect x="590" y="70" width="140" height="50" rx="8" fill="#493a1c" stroke="#dca73b" stroke-width="1.5"/>
+  <text x="660" y="101" fill="#e2e8f0" text-anchor="middle">Etape 4</text>
+  <rect x="750" y="70" width="140" height="50" rx="8" fill="#1c493a" stroke="#3bdca7" stroke-width="1.5"/>
+  <text x="820" y="101" fill="#e2e8f0" text-anchor="middle">Etape 5</text>
+  <rect x="750" y="150" width="140" height="50" rx="8" fill="#491c2b" stroke="#dc3b71" stroke-width="1.5"/>
+  <text x="820" y="181" fill="#e2e8f0" text-anchor="middle">Etape 6</text>
+  <rect x="750" y="230" width="140" height="50" rx="8" fill="#1c2b49" stroke="#3b71dc" stroke-width="1.5"/>
+  <text x="820" y="261" fill="#e2e8f0" text-anchor="middle">Etape 7</text>
+  <rect x="590" y="230" width="140" height="50" rx="8" fill="#2b491c" stroke="#71dc3b" stroke-width="1.5"/>
+  <text x="660" y="261" fill="#e2e8f0" text-anchor="middle">Etape 8</text>
+  <rect x="430" y="230" width="140" height="50" rx="8" fill="#3a1c49" stroke="#a73bdc" stroke-width="1.5"/>
+  <text x="500" y="261" fill="#e2e8f0" text-anchor="middle">Etape 9</text>
+  <rect x="270" y="230" width="140" height="50" rx="8" fill="#493a1c" stroke="#dca73b" stroke-width="1.5"/>
+  <text x="340" y="261" fill="#e2e8f0" text-anchor="middle">Etape 10</text>
+  <rect x="110" y="230" width="140" height="50" rx="8" fill="#1c493a" stroke="#3bdca7" stroke-width="1.5"/>
+  <text x="180" y="261" fill="#e2e8f0" text-anchor="middle">Etape 11</text>
+  <line x1="250" y1="95" x2="270" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="410" y1="95" x2="430" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="570" y1="95" x2="590" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="730" y1="95" x2="750" y2="95" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="820" y1="120" x2="820" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="820" y1="200" x2="820" y2="230" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="750" y1="255" x2="730" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="590" y1="255" x2="570" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="430" y1="255" x2="410" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="270" y1="255" x2="250" y2="255" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr)"/>
+</svg>

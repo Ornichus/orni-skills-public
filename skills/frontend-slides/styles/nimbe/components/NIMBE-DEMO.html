@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nimbe — Démo du style</title>
+<!-- Charge la VRAIE couche marque + la base viewport : cette démo valide
+     preset.css de bout en bout (si le rendu est bon, le preset est bon). -->
+<link rel="stylesheet" href="../../../viewport-base.css">
+<link rel="stylesheet" href="../preset.css">
+</head>
+<body>
+
+<!-- Matière colorée derrière le verre (les halos = "Nimbe") -->
+<div class="bg-decor"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></div>
+<div class="grid-ov"></div>
+
+<div class="toolbar">
+  <button class="tbtn" id="themeBtn" title="Thème clair / sombre" aria-label="Basculer le thème">☾ Thème</button>
+</div>
+<nav class="navdots" id="navdots"></nav>
+
+<!-- ============ SLIDE 1 — TITRE ============ -->
+<section class="slide" id="s1">
+  <div class="slide-content" style="align-items:flex-start">
+    <div class="rv"><span class="wordmark" style="font-size:clamp(1.1rem,2vw,1.5rem)">Nimbe</span></div>
+    <div class="eyebrow rv" style="margin-top:clamp(.9rem,1.8vh,1.4rem)"><span class="pip"></span> Style maison · « Nimbe » · v2.0.0</div>
+    <h1 class="hero rv">Le style <span class="hl-grad">Nimbe.</span></h1>
+    <p class="lead rv" style="max-width:54ch;margin-top:clamp(1rem,2vh,1.5rem)">Des halos de lumière colorée qui flottent derrière une surface en <strong>verre dépoli</strong> qui les réfracte. Lisible en clair comme en sombre, avec un code couleur porteur de sens et des composants à règle métier.</p>
+    <div class="row cols-3 rv stagger" style="margin-top:clamp(1.2rem,2.6vh,2rem);max-width:760px;width:100%">
+      <div class="lg interactive" style="text-align:center;padding:clamp(13px,2vw,22px)"><div class="metric" style="font-size:clamp(1.4rem,2.9vw,2.2rem)">.lg</div><div class="kpi-lbl">surface verre signature</div></div>
+      <div class="lg interactive" style="text-align:center;padding:clamp(13px,2vw,22px)"><div class="metric" style="font-size:clamp(1.4rem,2.9vw,2.2rem)">--c-*</div><div class="kpi-lbl">texte lisible bi-thème</div></div>
+      <div class="lg interactive" style="text-align:center;padding:clamp(13px,2vw,22px)"><div class="metric" style="font-size:clamp(1.4rem,2.9vw,2.2rem)">Cyan</div><div class="kpi-lbl">réservé « Équipe »</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Style Nimbe</span><span>01 / 03</span></div>
+</section>
+
+<!-- ============ SLIDE 2 — TABLE + CONVENTION CYAN=ÉQUIPE ============ -->
+<section class="slide" id="s2">
+  <div class="slide-content">
+    <div class="eyebrow rv"><span class="pip"></span> Code couleur sémantique</div>
+    <h2 class="rv">Le cyan signale <span class="hl" style="color:var(--c-cyan)">l'Équipe.</span></h2>
+    <p class="lead rv" style="max-width:64ch;margin-top:.6rem">Les lignes <strong>Équipe</strong> portent une teinte cyan dédiée — repérables d'un coup d'œil, sans légende à lire.</p>
+    <div class="lg pad rv" style="margin-top:clamp(1.2rem,2.6vh,2rem)">
+      <table class="ptable">
+        <thead><tr><th style="width:34%">Plan</th><th style="width:22%">Prix / mois</th><th style="width:22%">Pour</th><th style="width:22%">Statut</th></tr></thead>
+        <tbody>
+          <tr class="row-hi"><td>Max — individuel <span class="tag">Perso</span></td><td class="price">92 €</td><td>Très fort usage</td><td><span class="tag ok">Dispo</span></td></tr>
+          <tr><td>Standard — individuel</td><td class="price">18 €</td><td>Usage courant</td><td><span class="tag ok">Dispo</span></td></tr>
+          <tr class="row-team"><td>Team Standard <span class="tag team">Équipe</span></td><td class="price">18 €</td><td>Direction</td><td><span class="tag ok">Inclus</span></td></tr>
+          <tr class="row-team"><td>Team Premium <span class="tag team">Équipe · admin</span></td><td class="price">92 €</td><td>IT · devs</td><td><span class="tag ok">Inclus</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:.9rem"><span class="legend"><span class="sw"></span> Lignes en cyan = éléments « Équipe » (Business)</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Convention couleur</span><span>02 / 03</span></div>
+</section>
+
+<!-- ============ SLIDE 3 — CONFIGURATEUR À RÈGLE MÉTIER ============ -->
+<section class="slide" id="s3">
+  <div class="slide-content">
+    <div class="eyebrow rv"><span class="pip"></span> Composant interactif</div>
+    <h2 class="rv">Configurateur <span class="hl-grad">à règle ancrée.</span></h2>
+    <div class="lg pad rv" style="margin-top:clamp(1rem,2vh,1.4rem)">
+      <div class="builder-form">
+        <div class="bf-field bf-grow">
+          <label class="bf-cap" for="lbl">Libellé (personne / service)</label>
+          <div class="bf-inputwrap"><span class="bf-ic">✦</span><input id="lbl" class="bf-input" type="text" placeholder="ex. Direction, Pôle IT…"></div>
+        </div>
+        <div class="bf-field">
+          <label class="bf-cap" for="plan">Plan</label>
+          <select id="plan" class="bf-select">
+            <option value="max">Max — individuel · 100 $</option>
+            <option value="ind">Standard — individuel · 20 $</option>
+            <option value="std">Team Standard — Équipe · 25 $</option>
+            <option value="prem">Team Premium — siège admin · 125 $</option>
+          </select>
+        </div>
+        <button class="bf-add" id="addBtn" type="button">+ Ajouter</button>
+      </div>
+      <div id="teamHint" class="bf-hint" style="display:none">Plan <strong>Équipe</strong> sélectionné — un siège <strong>Team Premium</strong> (administrateur) est obligatoire dans la configuration.</div>
+
+      <div class="builder-grid">
+        <div class="lg pad builder-table">
+          <div class="bt-head"><span>Libellé</span><span>Plan</span><span>P.U.</span><span style="text-align:center">Qté</span><span>Ligne</span><span></span></div>
+          <div class="bt-body" id="rows"></div>
+        </div>
+        <div class="lg pad totals" id="totWrap">
+          <div class="team-chip" id="teamStatus">Aucun plan Équipe</div>
+          <div class="total-row"><span class="k">Total / mois</span><span class="v" id="totEur">0 €</span></div>
+          <div class="total-row"><span class="k">Sièges</span><span class="v" id="totSeats">0 licence</span></div>
+          <div class="total-big" id="totBig">0 €</div>
+          <div class="banner" id="teamBanner" style="display:none"></div>
+        </div>
+      </div>
+      <p class="small rv" style="margin-top:.6rem">Saisissez un libellé, choisissez un plan, validez. <strong>Règle ancrée</strong> : un plan Équipe exige au moins 1 siège Premium (l'administrateur) — sinon le bloc total passe en rouge avec un correctif en un clic.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Règle métier · état invalide</span><span>03 / 03</span></div>
+</section>
+
+<script>
+/* ===== Thème clair / sombre ===== */
+var root = document.documentElement;
+document.getElementById("themeBtn").addEventListener("click", function(){
+  root.setAttribute("data-theme", root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
+
+/* ===== Reveals au scroll (.rv -> .rv.in) ===== */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); } });
+}, { threshold: 0.15 });
+document.querySelectorAll(".rv, .stagger").forEach(function(el){ io.observe(el); });
+
+/* ===== Nav dots ===== */
+var dotsWrap = document.getElementById("navdots");
+var slides = document.querySelectorAll(".slide");
+slides.forEach(function(s, i){
+  var a = document.createElement("a");
+  a.href = "#" + s.id; a.setAttribute("aria-label", "Aller à la diapo " + (i+1));
+  dotsWrap.appendChild(a);
+});
+var dots = dotsWrap.querySelectorAll("a");
+var sio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var idx = Array.prototype.indexOf.call(slides, e.target);
+      dots.forEach(function(d, i){ d.classList.toggle("on", i === idx); });
+    }
+  });
+}, { threshold: 0.6 });
+slides.forEach(function(s){ sio.observe(s); });
+
+/* ===== Configurateur à règle métier ancrée ===== */
+var PLANS = {
+  max:  { name: "Max — individuel", usd: 100, kind: "ind" },
+  ind:  { name: "Standard — indiv.", usd: 20,  kind: "ind" },
+  std:  { name: "Team Standard",     usd: 25,  kind: "team", team: "standard" },
+  prem: { name: "Team Premium",      usd: 125, kind: "team", team: "premium" }
+};
+var USD_EUR = 0.92;
+var items = [];
+var uid = 1;
+
+function eur(usd){ return Math.round(usd * USD_EUR).toLocaleString("fr-FR") + " €"; }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function addItem(label, planKey){
+  var lbl = (label || "").trim() || PLANS[planKey].name;
+  items.push({ id: uid++, label: lbl, plan: planKey, qty: 1 });
+  render();
+}
+function setQty(id, delta){
+  items.forEach(function(x){ if(x.id === id){ x.qty = Math.max(1, x.qty + delta); } });
+  render();
+}
+function removeItem(id){ items = items.filter(function(x){ return x.id !== id; }); render(); }
+
+function teamCounts(){
+  var std = 0, prem = 0;
+  items.forEach(function(x){
+    if(PLANS[x.plan].team === "standard") std += x.qty;
+    if(PLANS[x.plan].team === "premium") prem += x.qty;
+  });
+  return { std: std, prem: prem, total: std + prem };
+}
+
+var rowsEl = document.getElementById("rows");
+
+function render(){
+  rowsEl.innerHTML = "";
+  if(items.length === 0){
+    rowsEl.innerHTML = '<div class="bt-empty">Aucune ligne. Ajoutez un libellé et un plan ci-dessus, puis validez.</div>';
+  }
+  items.forEach(function(it){
+    var p = PLANS[it.plan];
+    var line = p.usd * it.qty;
+    var row = document.createElement("div");
+    row.className = "bt-row" + (p.kind === "team" ? " team" : "");
+    row.innerHTML =
+      '<div class="bt-label" title="' + escapeHtml(it.label) + '">' + escapeHtml(it.label) + '</div>' +
+      '<div><span class="badge ' + (p.kind === "team" ? "b-team" : "b-ind") + '">' + p.name + '</span></div>' +
+      '<div class="bt-unit">' + eur(p.usd) + '</div>' +
+      '<div class="qty"><button data-act="dec" data-id="' + it.id + '" aria-label="moins">−</button><span>' + it.qty + '</span><button data-act="inc" data-id="' + it.id + '" aria-label="plus">+</button></div>' +
+      '<div class="bt-line">' + eur(line) + '</div>' +
+      '<button class="bt-del" data-act="del" data-id="' + it.id + '" title="Retirer la ligne">×</button>';
+    rowsEl.appendChild(row);
+  });
+
+  var totUSD = items.reduce(function(s, x){ return s + PLANS[x.plan].usd * x.qty; }, 0);
+  var seats = items.reduce(function(s, x){ return s + x.qty; }, 0);
+  document.getElementById("totEur").textContent = eur(totUSD);
+  document.getElementById("totBig").textContent = eur(totUSD);
+  document.getElementById("totSeats").textContent = seats + " licence" + (seats > 1 ? "s" : "");
+
+  var tc = teamCounts();
+  var statusEl = document.getElementById("teamStatus");
+  var bannerEl = document.getElementById("teamBanner");
+  var totWrap = document.getElementById("totWrap");
+
+  if(tc.total > 0 && tc.prem === 0){
+    statusEl.className = "team-chip bad";
+    statusEl.textContent = "Plan Équipe · administrateur Premium requis ✗";
+    bannerEl.className = "banner warn";
+    bannerEl.style.display = "";
+    bannerEl.innerHTML = '⚠ Plan Équipe : au moins <strong>1 siège Team Premium</strong> (administrateur) est obligatoire. <button id="quickPrem" type="button">+ Ajouter 1 admin Premium</button>';
+    document.getElementById("quickPrem").addEventListener("click", function(){ addItem("Administrateur Équipe (à désigner)", "prem"); });
+    totWrap.classList.add("invalid");
+  } else if(tc.total > 0){
+    totWrap.classList.remove("invalid");
+    statusEl.className = "team-chip ok";
+    statusEl.textContent = "Plan Équipe · admin Premium ✓ (" + tc.prem + ")";
+    bannerEl.style.display = "none";
+  } else {
+    totWrap.classList.remove("invalid");
+    statusEl.className = "team-chip";
+    statusEl.textContent = "Aucun plan Équipe";
+    bannerEl.style.display = "none";
+  }
+}
+
+/* Indice "Équipe" sous le formulaire selon le plan choisi */
+var planSel = document.getElementById("plan");
+planSel.addEventListener("change", function(){
+  var isTeam = PLANS[planSel.value].kind === "team";
+  document.getElementById("teamHint").style.display = isTeam ? "" : "none";
+});
+
+document.getElementById("addBtn").addEventListener("click", function(){
+  var lbl = document.getElementById("lbl");
+  addItem(lbl.value, planSel.value);
+  lbl.value = "";
+});
+rowsEl.addEventListener("click", function(e){
+  var b = e.target.closest("button[data-act]");
+  if(!b) return;
+  var id = parseInt(b.getAttribute("data-id"), 10);
+  var act = b.getAttribute("data-act");
+  if(act === "inc") setQty(id, 1);
+  else if(act === "dec") setQty(id, -1);
+  else if(act === "del") removeItem(id);
+});
+
+/* Pré-remplissage : illustre l'état INVALIDE (Team sans admin Premium) */
+addItem("Direction", "std");
+</script>
+</body>
+</html>

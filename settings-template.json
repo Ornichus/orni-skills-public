@@ -1,0 +1,41 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -ExecutionPolicy Bypass -File %USERPROFILE%\\.claude\\statusline.ps1"
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File %USERPROFILE%\\.claude\\hooks\\stop-handler.ps1",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File %USERPROFILE%\\.claude\\hooks\\precompact-handler.ps1",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File %USERPROFILE%\\.claude\\hooks\\session-start-handler.ps1",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

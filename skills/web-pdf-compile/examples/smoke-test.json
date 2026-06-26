@@ -1,0 +1,34 @@
+{
+  "title": "Smoke Test — Web PDF Compile",
+  "subtitle": "Test integration orni-skills (1 source Wikipedia)",
+  "output_dir": "./output/smoke-test",
+  "country_order": [
+    { "code": "WW", "name": "Worldwide" }
+  ],
+  "sources": [
+    {
+      "id": "01",
+      "shortname": "wikipedia-test",
+      "country": "WW",
+      "url": "https://en.wikipedia.org/wiki/Test",
+      "selectors": [
+        "#content",
+        ".mw-parser-output",
+        "main"
+      ],
+      "extraRemove": [
+        "#mw-navigation",
+        "#footer",
+        ".mw-editsection",
+        ".navbox",
+        ".reference",
+        ".infobox",
+        "#siteSub",
+        "#contentSub"
+      ],
+      "longwait": false,
+      "useHeuristic": false,
+      "source": null
+    }
+  ]
+}

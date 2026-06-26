@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       PROJECT METADATA
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <metadata>
+    <name>PROJECT_NAME</name>
+    <archon-project-id>UUID_HERE</archon-project-id>
+    <version>0.1.0</version>
+    <last-updated>YYYY-MM-DDTHH:MM:SS+01:00</last-updated>
+    <description>
+      Description courte du projet.
+    </description>
+    <repository>PATH_TO_PROJECT</repository>
+  </metadata>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       PREREQUISITES
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <prerequisites status="pending">
+    <!-- Ajouter vos credentials et services requis -->
+    <credential name="API_KEY" status="pending"/>
+    <service name="Docker" status="pending" url="localhost:PORT"/>
+  </prerequisites>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       CURRENT STATE
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <current-state>
+    <phase>Phase 1</phase>
+    <status>Description de l'état actuel</status>
+    <progress-percent>0</progress-percent>
+
+    <current-focus>
+      <task>Tâche principale en cours</task>
+    </current-focus>
+
+    <!-- Résumé des waves/phases (une ligne par wave) -->
+    <waves-summary>
+      <wave number="1" name="Setup" status="todo">Configuration initiale</wave>
+      <wave number="2" name="Core" status="todo">Fonctionnalités principales</wave>
+      <wave number="3" name="Integration" status="todo">Tests et intégration</wave>
+    </waves-summary>
+
+    <last-milestone date="YYYY-MM-DD">
+      <name>Milestone name</name>
+      <description>Description courte</description>
+    </last-milestone>
+  </current-state>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       TECHNICAL DECISIONS
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <technical-decisions>
+    <decision id="TD-001">Stack: Décision technique #1</decision>
+    <decision id="TD-002">Architecture: Décision technique #2</decision>
+  </technical-decisions>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       ARCHITECTURE SUMMARY
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <architecture-summary>
+    <stack>
+      <frontend>Technologies frontend</frontend>
+      <backend>Technologies backend</backend>
+    </stack>
+
+    <key-paths>
+      <path type="src">src/</path>
+      <path type="tests">tests/</path>
+    </key-paths>
+
+    <key-files>
+      <file>src/main.py</file>
+      <file>src/app.tsx</file>
+    </key-files>
+  </architecture-summary>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       LAST CONVERSATION (3 derniers messages avant /update)
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <last-conversation updated="">
+    <!-- Rempli automatiquement par /update -->
+  </last-conversation>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       HISTORY REFERENCE
+       ═══════════════════════════════════════════════════════════════════════════ -->
+  <history-reference>
+    <note>L'historique complet est archivé dans:</note>
+    <archive-path>_backup/project-state/archive/</archive-path>
+    <last-archive>project-state-history_YYYY-MM-DD.xml</last-archive>
+    <backup-path>_backup/project-state/current/project-state_latest.xml</backup-path>
+  </history-reference>
+
+</project-state>

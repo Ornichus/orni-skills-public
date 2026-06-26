@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nimbe — Bibliothèque du style (verre + composants) v3.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../preset.css" />
+<link rel="stylesheet" href="liquid-glass.css" />
+<link rel="stylesheet" href="liquid-glass-extended.css" />
+<style>
+  html { scroll-snap-type: none; scroll-behavior: smooth; }
+  body { overflow-x: hidden; overflow-y: auto; min-height: 100vh; }
+  html.theme-transitioning #uv-cards,
+  html.theme-transitioning #uv-cards *,
+  html.theme-transitioning #uv-cards *::before,
+  html.theme-transitioning #uv-cards *::after {
+    transition: none !important;
+  }
+  section.lg-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .lg-section .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .lg-section h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .lg-section h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .lg-section .lead {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    max-width: 60ch;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+  .lg-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--nimbe-blue);
+    background: rgba(0, 39, 163, 0.10);
+    border: 1px solid rgba(0, 39, 163, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin-bottom: 1.5rem;
+  }
+  .lg-eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34,197,94,0.7);
+    animation: lg-pulse 2s ease-in-out infinite;
+  }
+  @keyframes lg-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+  .label-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    margin-top: 1rem;
+  }
+  .demo-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 12rem;
+    padding: 1.5rem;
+  }
+  .hero {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    max-width: 16ch;
+    margin: 0 auto;
+  }
+  .hero p {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    max-width: 56ch;
+    margin: 1.5rem auto 0;
+  }
+  .hero .cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .glass-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .glass-cards-row .icn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, var(--liquid-blue), var(--liquid-cyan));
+    box-shadow: 0 8px 16px var(--nimbe-blue-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .glass-cards-row .h-card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .glass-cards-row p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 768px) {
+    .glass-cards-row { grid-template-columns: 1fr; }
+  }
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .toc a {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1rem;
+    background: var(--glass-tint);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 200ms ease;
+  }
+  .toc a:hover {
+    border-color: var(--nimbe-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--nimbe-blue-glow);
+  }
+  .toc a .num {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    color: var(--nimbe-blue);
+    background: rgba(0,39,163,0.15);
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light" style="position: fixed; top: 1.5rem; right: 1.5rem; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--glass-tint-strong); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); color: var(--text); cursor: pointer; z-index: 999; display: flex; align-items: center; justify-content: center;">
+  <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="aurora-bg"></div>
+  <span class="lg-eyebrow"><span class="dot"></span>Style Nimbe · v3.0</span>
+  <h1 class="holo-text">Composants signature — style Nimbe</h1>
+  <p>Bibliothèque premium du style <strong>Nimbe</strong> (verre dépoli + halos) — phones animés, charts précis, mockups riches, buttons, inputs, cards 3D, data display, feedback, navigation, et le <strong>configurateur à règle métier</strong> (cyan = Équipe).</p>
+  <div class="cta">
+    <a href="#core" class="glass-btn primary">Parcourir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="NIMBE-DEMO.html" class="glass-btn">Démo Nimbe</a>
+    <a href="../golden/LIQUID-GLASS-STANDARD-v2.html" class="glass-btn">Standard du verre</a>
+  </div>
+
+  <div style="margin-top: 4rem; max-width: 900px; width: 100%;">
+    <div class="toc">
+      <a href="#core"><span class="num">01</span> Glass Core</a>
+      <a href="#buttons"><span class="num">02</span> Buttons</a>
+      <a href="#inputs"><span class="num">03</span> Inputs</a>
+      <a href="#loaders"><span class="num">04</span> Loaders</a>
+      <a href="#charts"><span class="num">05</span> Charts V2</a>
+      <a href="#metrics"><span class="num">06</span> KPI Metrics</a>
+      <a href="#phones"><span class="num">07</span> Phones Animés</a>
+      <a href="#laptop"><span class="num">08</span> Laptop Rich</a>
+      <a href="#cards"><span class="num">09</span> Cards Avancées</a>
+      <a href="#data"><span class="num">10</span> Data Display</a>
+      <a href="#feedback"><span class="num">11</span> Feedback</a>
+      <a href="#nav"><span class="num">12</span> Navigation</a>
+      <a href="#ui"><span class="num">13</span> UI Elements</a>
+      <a href="#aurora"><span class="num">14</span> Aurora Card</a>
+      <a href="#uv-cards"><span class="num">15</span> Cartes Showcase Uiverse</a>
+      <a href="#uv-patterns"><span class="num">16</span> Patterns Backgrounds</a>
+      <a href="#deck-patterns"><span class="num">17</span> Deck Patterns (Phase 3)</a>
+    </div>
+  </div>
+</section>
+
+<!-- 01 GLASS CORE -->
+<section class="lg-section" id="core">
+  <div class="container">
+    <span class="lg-eyebrow">01 · Glass Core</span>
+    <h2><span class="holo-text">Surfaces</span> liquides</h2>
+    <p class="lead">Cartes premium, orbes flottantes, switches frosted, tabs. Fondation de toute interface en verre.</p>
+
+    <div class="glass-cards-row" data-replay>
+      <div class="glass-card-liquid">
+        <div class="icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="h-card-title">Sécurisé</div>
+        <p>Hébergement dédié, chiffrement de bout en bout, conformité réglementaire.</p>
+        <div class="label-tag">.glass-card-liquid</div>
+      </div>
+      <div class="glass-card-liquid">
+        <div class="icn" style="background: linear-gradient(135deg, var(--liquid-red), #d4534b); box-shadow: 0 8px 16px rgba(161,20,14,0.4);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="h-card-title">Accessible</div>
+        <p>Interfaces simples, accessibles à tous, sur tous les appareils.</p>
+        <div class="label-tag">.glass-card-liquid</div>
+      </div>
+      <div class="glass-card-liquid">
+        <div class="icn" style="background: linear-gradient(135deg, var(--liquid-violet), #a78bfa);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="h-card-title">Durable</div>
+        <p>Impact mesurable, KPIs trimestriels, accompagnement long terme.</p>
+        <div class="label-tag">.glass-card-liquid</div>
+      </div>
+    </div>
+
+    <div class="lg-grid-4" style="margin-top: 3rem;" data-replay>
+      <div class="demo-cell"><div class="glass-orb"></div><div class="label-tag">.glass-orb</div></div>
+      <div class="demo-cell"><div class="glass-switch on" onclick="this.classList.toggle('on')"></div><div class="glass-switch" onclick="this.classList.toggle('on')"></div><div class="label-tag">.glass-switch</div></div>
+      <div class="demo-cell"><div class="glass-tabs"><button class="active">Aperçu</button><button>Données</button><button>API</button></div><div class="label-tag">.glass-tabs</div></div>
+      <div class="demo-cell"><div class="glass-dock"><div class="glass-dock-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="glass-dock-item subtle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="glass-dock-item alt"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div></div><div class="label-tag">.glass-dock</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 BUTTONS EXTENDED -->
+<section class="lg-section" id="buttons">
+  <div class="container">
+    <span class="lg-eyebrow">02 · Buttons</span>
+    <h2><span class="holo-text">7</span> variants premium</h2>
+    <p class="lead">Pill morph, gradient border rotatif, neon, loading state, icon flip, frosted, primary CTA.</p>
+
+    <div class="lg-grid-4" data-replay>
+      <div class="demo-cell"><button class="glass-btn primary">Primary CTA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button><div class="label-tag">.glass-btn.primary</div></div>
+      <div class="demo-cell"><button class="glass-btn">Frosted</button><div class="label-tag">.glass-btn</div></div>
+      <div class="demo-cell"><button class="btn-gradient-border">Border rotatif</button><div class="label-tag">.btn-gradient-border</div></div>
+      <div class="demo-cell"><button class="btn-neon">Neon glow</button><div class="label-tag">.btn-neon</div></div>
+      <div class="demo-cell"><button class="btn-loading">Loading…</button><div class="label-tag">.btn-loading</div></div>
+      <div class="demo-cell"><button class="btn-icon-flip">Refresh <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button><div class="label-tag">.btn-icon-flip</div></div>
+      <div class="demo-cell"><button class="btn-pill-morph">Hover morph</button><div class="label-tag">.btn-pill-morph</div></div>
+      <div class="demo-cell"><button class="uv-btn-mole">Aura</button><div class="label-tag">.uv-btn-mole</div></div>
+      <div class="demo-cell"><button class="uv-btn-baboon"><span>Sweep</span></button><div class="label-tag">.uv-btn-baboon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 INPUTS GLASS -->
+<section class="lg-section" id="inputs">
+  <div class="container">
+    <span class="lg-eyebrow">03 · Inputs</span>
+    <h2>Forms <span class="holo-text">frosted</span></h2>
+    <p class="lead">Search bar, range slider, checkbox liquide — toutes les inputs avec backdrop blur.</p>
+
+    <div class="lg-grid-2" style="gap: 3rem;" data-replay>
+      <div>
+        <h3>Search bar</h3>
+        <div class="glass-search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Rechercher dans Nimbe Cloud..." />
+          <span class="glass-search-shortcut">⌘ K</span>
+        </div>
+        <div class="label-tag">.glass-search</div>
+
+        <h3 style="margin-top: 2rem;">Range slider</h3>
+        <input type="range" class="glass-range" min="0" max="100" value="62" oninput="this.style.setProperty('--range-pct', this.value + '%')">
+        <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-subtle); font-family: var(--font-display);"><span>0</span><span style="color: var(--nimbe-blue); font-weight: 700;">62%</span><span>100</span></div>
+        <div class="label-tag">.glass-range</div>
+      </div>
+
+      <div>
+        <h3>Checkboxes</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <label class="glass-checkbox"><input type="checkbox" checked /><span class="box"></span><span>Chiffrement des données</span></label>
+          <label class="glass-checkbox"><input type="checkbox" checked /><span class="box"></span><span>Conformité RGPD</span></label>
+          <label class="glass-checkbox"><input type="checkbox" /><span class="box"></span><span>Backup multi-région</span></label>
+          <label class="glass-checkbox"><input type="checkbox" /><span class="box"></span><span>SLA 99.99%</span></label>
+        </div>
+        <div class="label-tag">.glass-checkbox</div>
+
+        <h3 style="margin-top: 2.5rem;">Search aurore (Uiverse)</h3>
+        <div class="uv-input-goat">
+          <div class="uv-input-goat-shell">
+            <svg class="uv-input-goat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Rechercher…" />
+            <button class="uv-input-goat-filter" aria-label="Filter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="label-tag">.uv-input-goat</div>
+
+        <h3 style="margin-top: 2rem;">Search conic (Uiverse)</h3>
+        <div class="uv-input-earwig22">
+          <div class="uv-input-earwig22-glow"></div>
+          <div class="uv-input-earwig22-border"></div>
+          <div class="uv-input-earwig22-bg"></div>
+          <div class="uv-input-earwig22-search-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <input type="text" placeholder="Search…" />
+          <div class="uv-input-earwig22-filter-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+          </div>
+        </div>
+        <div class="label-tag">.uv-input-earwig22</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LOADERS -->
+<section class="lg-section" id="loaders">
+  <div class="container">
+    <span class="lg-eyebrow">04 · Motion · Loaders</span>
+    <h2>Animations <span class="holo-text">vivantes</span></h2>
+    <p class="lead">Loaders premium pour transitions, attentes API, chargement.</p>
+
+    <div class="lg-grid-4" data-replay>
+      <div class="demo-cell"><div class="loader-orbit"><span></span><span></span><span></span></div><div class="label-tag">.loader-orbit</div></div>
+      <div class="demo-cell"><div class="loader-wave"><span></span><span></span><span></span><span></span><span></span></div><div class="label-tag">.loader-wave</div></div>
+      <div class="demo-cell"><div class="loader-ring"></div><div class="label-tag">.loader-ring</div></div>
+      <div class="demo-cell"><div class="loader-blob"></div><div class="label-tag">.loader-blob</div></div>
+
+      <div class="demo-cell">
+        <div class="uv-loader-treefrog">
+          <svg viewBox="0 0 64 64">
+            <defs>
+              <linearGradient id="uvtf-grad-1" x1="0" y1="64" x2="0" y2="2" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#0027a3"/>
+              </linearGradient>
+            </defs>
+            <path class="uv-tf-dash" stroke="url(#uvtf-grad-1)" pathLength="360" d="M 54.722656,3.972 A 2,2 0 0 0 54.941406,4 h 5.007813 C 58.955121,17.046 49.099667,27.677 36.121094,29.580 a 2,2 0 0 0 -1.708985,1.978 V 60 H 29.587891 V 31.558594 A 2,2 0 0 0 27.878906,29.580078 C 14.900333,27.677057 5.0448787,17.046 4.0507812,4 H 9.28125 c 1.231666,11.636 10.984383,20.554 22.6875,20.734 a 2,2 0 0 0 0.02344,0 c 11.806958,0.043 21.70649,-9.003 22.730469,-20.7617 z"/>
+          </svg>
+          <svg viewBox="0 0 64 64">
+            <defs>
+              <linearGradient id="uvtf-grad-2" x1="0" y1="64" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#4f8ef7"/><stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+            <path class="uv-tf-spin" stroke="url(#uvtf-grad-2)" pathLength="360" d="M 32 32 m 0 -27 a 27 27 0 1 1 0 54 a 27 27 0 1 1 0 -54"/>
+          </svg>
+          <svg viewBox="0 0 64 64">
+            <defs>
+              <linearGradient id="uvtf-grad-3" x1="0" y1="62" x2="0" y2="2" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#0027a3"/><stop offset="1" stop-color="#4f8ef7"/>
+              </linearGradient>
+            </defs>
+            <path class="uv-tf-dash" stroke="url(#uvtf-grad-3)" pathLength="360" d="M 4,4 h 4.6230469 v 25.919922 c -0.00276,11.916203 9.8364941,21.550422 21.7500001,21.296875 11.616666,-0.240651 21.014356,-9.638 21.253906,-21.255 a 2,2 0 0 0 0,-0.041 V 4 H 56.25 v 25.919922 c 0,14.339 -11.581192,25.92 -25.919922,25.92 a 2,2 0 0 0 -0.0293,0 C 15.812309,56.052941 3.998433,44.41 4,29.92 Z"/>
+          </svg>
+        </div>
+        <div class="label-tag">.uv-loader-treefrog</div>
+      </div>
+      <div class="demo-cell"><div class="uv-loader-falcon"></div><div class="label-tag">.uv-loader-falcon</div></div>
+      <div class="demo-cell">
+        <div class="uv-loader-squid">
+          <span class="uv-sq-ring"></span>
+          <span class="uv-sq-ring"></span>
+          <span class="uv-sq-ring"></span>
+          <span class="uv-sq-core"></span>
+        </div>
+        <div class="label-tag">.uv-loader-squid</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 CHARTS V2 -->
+<section class="lg-section" id="charts">
+  <div class="container">
+    <span class="lg-eyebrow">05 · Data · Charts V2</span>
+    <h2>Données <span class="holo-text">animées</span></h2>
+    <p class="lead">Replay-on-view, valeurs au-dessus des bars, glow layers, alignement précis.</p>
+
+    <div class="lg-grid-2" style="gap: 3rem;">
+      <div data-replay>
+        <div class="chart-bar-v2">
+          <div class="bar" style="height: 30%;"><span class="bar-val">12K</span><span class="bar-lab">2020</span></div>
+          <div class="bar" style="height: 45%;"><span class="bar-val">18K</span><span class="bar-lab">2021</span></div>
+          <div class="bar" style="height: 60%;"><span class="bar-val">24K</span><span class="bar-lab">2022</span></div>
+          <div class="bar" style="height: 72%;"><span class="bar-val">29K</span><span class="bar-lab">2023</span></div>
+          <div class="bar" style="height: 85%;"><span class="bar-val">34K</span><span class="bar-lab">2024</span></div>
+          <div class="bar accent" style="height: 100%;"><span class="bar-val">40K</span><span class="bar-lab">2025</span></div>
+        </div>
+        <div class="label-tag" style="margin-top: 0.5rem; text-align: center; display: block;">.chart-bar-v2</div>
+      </div>
+
+      <div class="demo-cell" data-replay>
+        <div class="pie-v2"><div class="pie-v2-hole"><div class="value">62%</div><div class="label">Adoption</div></div></div>
+        <div class="label-tag">.pie-v2</div>
+      </div>
+
+      <div class="demo-cell" data-replay>
+        <div class="donut-v2" style="--donut-offset: 56;"><svg viewBox="0 0 100 100"><defs><linearGradient id="donutGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0027a3"/><stop offset="100%" stop-color="#4f8ef7"/></linearGradient></defs><circle class="track" cx="50" cy="50" r="45"/><circle class="progress" cx="50" cy="50" r="45"/></svg><div class="center"><span class="val">80%</span><span class="lab">Coverage</span></div></div>
+        <div class="label-tag">.donut-v2</div>
+      </div>
+
+      <div class="demo-cell" data-replay>
+        <div class="gauge-v2" style="--gauge-offset: 60;">
+          <div class="gauge-v2-arc">
+            <svg viewBox="0 0 200 110"><defs><linearGradient id="gaugeGradientV2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a1140e"/><stop offset="50%" stop-color="#0027a3"/><stop offset="100%" stop-color="#4f8ef7"/></linearGradient></defs><path class="track" d="M 25 100 A 75 75 0 0 1 175 100"/><path class="fill" d="M 25 100 A 75 75 0 0 1 175 100"/></svg>
+            <span class="gauge-v2-value">72</span>
+          </div>
+          <span class="gauge-v2-label">Adoption Index</span>
+        </div>
+        <div class="label-tag">.gauge-v2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 KPI METRICS -->
+<section class="lg-section" id="metrics">
+  <div class="container">
+    <span class="lg-eyebrow">06 · Metrics</span>
+    <h2>KPIs <span class="holo-text">premium</span></h2>
+    <p class="lead">Cartes glass avec gradient text, deltas colorés, shine subtil.</p>
+
+    <div class="lg-grid-4" data-replay>
+      <div class="glass-metric"><div class="num">847K</div><div class="lab">Sessions actives</div><div class="delta">▲ +18.2%</div></div>
+      <div class="glass-metric"><div class="num">99.97%</div><div class="lab">Uptime</div><div class="delta">▲ +0.04%</div></div>
+      <div class="glass-metric"><div class="num">42ms</div><div class="lab">Latence p95</div><div class="delta down">▼ -12%</div></div>
+      <div class="glass-metric"><div class="num">12.4M</div><div class="lab">API calls / jour</div><div class="delta">▲ +24.8%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PHONES ANIMÉS -->
+<section class="lg-section" id="phones">
+  <div class="container">
+    <span class="lg-eyebrow">07 · Phones Animés</span>
+    <h2>Smartphones <span class="holo-text">vivants</span></h2>
+    <p class="lead">3 variantes : notifications qui glissent, conversation chat avec typing, lockscreen avec scan biométrique.</p>
+
+    <div class="lg-grid-3" style="align-items: center; gap: 3rem;" data-replay>
+      <div class="demo-cell">
+        <div class="phone-anim">
+          <div class="phone-anim-screen">
+            <div class="phone-anim-notch"></div>
+            <div class="phone-notif-stream">
+              <div class="phone-notif">
+                <div class="icn"></div>
+                <div class="body"><strong>Léa M.</strong><span>Paiement reçu · 250 €</span></div>
+              </div>
+              <div class="phone-notif">
+                <div class="icn alt"></div>
+                <div class="body"><strong>Banque</strong><span>Solde · 12 480 €</span></div>
+              </div>
+              <div class="phone-notif">
+                <div class="icn violet"></div>
+                <div class="body"><strong>Nimbe</strong><span>Compte vérifié</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.phone-anim · notifs</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="phone-anim">
+          <div class="phone-anim-screen">
+            <div class="phone-anim-notch"></div>
+            <div class="phone-chat-stream">
+              <div class="phone-bubble them">Bonjour, j'ai besoin d'aide pour mon compte</div>
+              <div class="phone-bubble me">Bien sûr ! Je vous écoute</div>
+              <div class="phone-bubble them">Mon virement est en attente</div>
+              <div class="phone-bubble me">Je vérifie en direct ✓</div>
+              <div class="phone-typing"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.phone-bubble · chat</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="phone-anim">
+          <div class="phone-anim-screen">
+            <div class="phone-anim-notch"></div>
+            <div class="phone-unlock-screen">
+              <div class="phone-unlock-time">9:41</div>
+              <div class="phone-unlock-date">Lundi 27 Avril</div>
+              <div class="phone-unlock-fp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c-1.7 0-3.3.3-4.8 1C5.6 3.7 4.2 4.6 3 5.8M21 5.8c-1.2-1.2-2.6-2.1-4.2-2.8C15.3 2.3 13.7 2 12 2M3 16c1.4 1.6 3.1 2.9 5 3.7M21 16c-1.4 1.6-3.1 2.9-5 3.7M12 22c-1 0-1.9-.1-2.9-.3M12 22c1 0 1.9-.1 2.9-.3M3 11c0-2 .4-3.9 1.3-5.6M21 11c0-2-.4-3.9-1.3-5.6M12 11v6M9 14h6"/></svg>
+              </div>
+              <div class="phone-unlock-hint">Touch ID</div>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.phone-unlock-screen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 LAPTOP RICH -->
+<section class="lg-section" id="laptop">
+  <div class="container">
+    <span class="lg-eyebrow">08 · Laptop Dashboard</span>
+    <h2>Workstation <span class="holo-text">complète</span></h2>
+    <p class="lead">Sidebar nav + KPIs + chart bars dans un mockup laptop premium.</p>
+
+    <div class="demo-cell" data-replay>
+      <div class="laptop-rich">
+        <div class="laptop-rich-screen">
+          <div class="laptop-rich-display">
+            <div class="laptop-rich-sidebar">
+              <div class="icn active"></div>
+              <div class="icn"></div>
+              <div class="icn"></div>
+              <div class="icn"></div>
+            </div>
+            <div class="laptop-rich-main">
+              <div class="laptop-rich-header"><span class="title">Dashboard Cloud</span></div>
+              <div class="laptop-rich-kpis">
+                <div class="laptop-rich-kpi"><div class="num">847</div><div class="lab">Active</div></div>
+                <div class="laptop-rich-kpi"><div class="num">99%</div><div class="lab">Uptime</div></div>
+                <div class="laptop-rich-kpi"><div class="num">42ms</div><div class="lab">p95</div></div>
+              </div>
+              <div class="laptop-rich-chart">
+                <div class="bar" style="height: 30%;"></div>
+                <div class="bar" style="height: 50%;"></div>
+                <div class="bar" style="height: 65%;"></div>
+                <div class="bar" style="height: 45%;"></div>
+                <div class="bar" style="height: 75%;"></div>
+                <div class="bar hi" style="height: 90%;"></div>
+                <div class="bar" style="height: 70%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-rich-base"></div>
+      </div>
+      <div class="label-tag">.laptop-rich</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CARDS AVANCÉES -->
+<section class="lg-section" id="cards">
+  <div class="container">
+    <span class="lg-eyebrow">09 · Cards Avancées</span>
+    <h2>Surfaces <span class="holo-text">interactives</span></h2>
+    <p class="lead">3D tilt au hover, flip front/back, glow border rotatif, pricing tiers.</p>
+
+    <div class="lg-grid-2" style="gap: 1.5rem; margin-bottom: 3rem;" data-replay>
+      <div class="card-3d">
+        <h3 style="font-size: 1.25rem;">3D Tilt</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;">Hover pour voir l'effet perspective. Inclinaison 8/12 deg.</p>
+        <div class="label-tag">.card-3d</div>
+      </div>
+      <div class="card-flip">
+        <div class="card-flip-inner">
+          <div class="card-flip-front">
+            <div class="glass-orb" style="width: 4rem; height: 4rem;"></div>
+            <h3 style="font-size: 1.125rem;">Hover me · Flip</h3>
+            <div class="label-tag">.card-flip front</div>
+          </div>
+          <div class="card-flip-back">
+            <h3 style="font-size: 1.5rem; color: #fff;">Verso révélé</h3>
+            <p style="font-size: 0.875rem; opacity: 0.85;">Animation rotateY 800ms cubic-bezier.</p>
+            <div class="label-tag" style="color: rgba(255,255,255,0.6);">.card-flip back</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg-grid-2" style="gap: 1.5rem; margin-bottom: 3rem;" data-replay>
+      <div class="card-glow">
+        <h3 style="font-size: 1.25rem;">Glow Border</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;">Bordure conic-gradient en rotation continue.</p>
+        <div class="label-tag">.card-glow</div>
+      </div>
+      <div class="glass-card-liquid">
+        <h3 style="font-size: 1.25rem;">Glass Liquid</h3>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;">Card backdrop blur + bevel + inner shine. Hover lift.</p>
+        <div class="label-tag">.glass-card-liquid</div>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom: 1rem; text-align: center;">Pricing tiers</h3>
+    <div class="lg-grid-3" style="gap: 1.5rem; align-items: center;" data-replay>
+      <div class="card-pricing">
+        <div class="card-pricing-tier">Starter</div>
+        <div class="card-pricing-price">29€</div>
+        <div class="card-pricing-period">/ mois</div>
+        <ul class="card-pricing-features">
+          <li>10 GB cloud</li>
+          <li>Support 9h-18h</li>
+          <li>1 utilisateur</li>
+        </ul>
+        <button class="glass-btn" style="width: 100%; justify-content: center;">Commencer</button>
+      </div>
+      <div class="card-pricing featured">
+        <div class="card-pricing-tier">Pro</div>
+        <div class="card-pricing-price">99€</div>
+        <div class="card-pricing-period">/ mois</div>
+        <ul class="card-pricing-features">
+          <li>500 GB cloud</li>
+          <li>Support 24/7</li>
+          <li>10 utilisateurs</li>
+          <li>API illimitée</li>
+        </ul>
+        <button class="glass-btn primary" style="width: 100%; justify-content: center;">Choisir Pro</button>
+      </div>
+      <div class="card-pricing">
+        <div class="card-pricing-tier">Enterprise</div>
+        <div class="card-pricing-price">∞</div>
+        <div class="card-pricing-period">sur devis</div>
+        <ul class="card-pricing-features">
+          <li>Stockage illimité</li>
+          <li>SLA dédié</li>
+          <li>Onboarding personnalisé</li>
+        </ul>
+        <button class="glass-btn" style="width: 100%; justify-content: center;">Contacter</button>
+      </div>
+    </div>
+    <div class="label-tag" style="text-align: center; display: block; margin-top: 1.5rem;">.card-pricing · .featured</div>
+  </div>
+</section>
+
+<!-- 10 DATA DISPLAY -->
+<section class="lg-section" id="data">
+  <div class="container">
+    <span class="lg-eyebrow">10 · Data Display</span>
+    <h2>Indicateurs <span class="holo-text">visuels</span></h2>
+    <p class="lead">Avatar stack, timeline, calendrier, notification bell, voice waveform.</p>
+
+    <div class="lg-grid-2" style="gap: 3rem;" data-replay>
+      <div>
+        <h3>Avatar stack</h3>
+        <div class="avatar-stack">
+          <div class="avatar">AM</div>
+          <div class="avatar alt">FD</div>
+          <div class="avatar violet">KS</div>
+          <div class="avatar cyan">BD</div>
+          <div class="avatar more">+12</div>
+        </div>
+        <div class="label-tag" style="margin-bottom: 2.5rem;">.avatar-stack</div>
+
+        <h3>Voice wave</h3>
+        <div class="voice-wave">
+          <span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span><span class="vbar"></span>
+        </div>
+        <div class="label-tag" style="margin-bottom: 2.5rem;">.voice-wave</div>
+
+        <h3>Notification bell</h3>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <div class="notif-bell">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge">12</span>
+          </div>
+          <div class="notif-bell">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge">3</span>
+          </div>
+        </div>
+        <div class="label-tag">.notif-bell</div>
+      </div>
+
+      <div>
+        <h3>Timeline glass</h3>
+        <div class="timeline-glass">
+          <div class="timeline-item done">
+            <div class="time">14:32 · Aujourd'hui</div>
+            <h4>Migration base de données validée</h4>
+            <p>847 dossiers traités, 0 erreur. Backup auto effectué.</p>
+          </div>
+          <div class="timeline-item done">
+            <div class="time">11:15 · Aujourd'hui</div>
+            <h4>Déploiement v2.4.1 prod</h4>
+            <p>3/3 pods healthy sur cluster nimbe-prod.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time">À venir</div>
+            <h4>Audit de conformité</h4>
+            <p>Rapport trimestriel programmé pour le 30/04.</p>
+          </div>
+        </div>
+        <div class="label-tag" style="margin-bottom: 2.5rem;">.timeline-glass · .done</div>
+
+        <h3>Calendrier</h3>
+        <div class="calendar-grid">
+          <div class="head">L</div><div class="head">M</div><div class="head">M</div><div class="head">J</div><div class="head">V</div><div class="head">S</div><div class="head">D</div>
+          <div class="calendar-cell muted">28</div><div class="calendar-cell muted">29</div><div class="calendar-cell muted">30</div><div class="calendar-cell">1</div><div class="calendar-cell">2</div><div class="calendar-cell">3</div><div class="calendar-cell">4</div>
+          <div class="calendar-cell">5</div><div class="calendar-cell event">6</div><div class="calendar-cell">7</div><div class="calendar-cell">8</div><div class="calendar-cell event">9</div><div class="calendar-cell">10</div><div class="calendar-cell">11</div>
+          <div class="calendar-cell">12</div><div class="calendar-cell">13</div><div class="calendar-cell">14</div><div class="calendar-cell">15</div><div class="calendar-cell event">16</div><div class="calendar-cell">17</div><div class="calendar-cell">18</div>
+          <div class="calendar-cell">19</div><div class="calendar-cell">20</div><div class="calendar-cell">21</div><div class="calendar-cell">22</div><div class="calendar-cell">23</div><div class="calendar-cell">24</div><div class="calendar-cell">25</div>
+          <div class="calendar-cell">26</div><div class="calendar-cell today">27</div><div class="calendar-cell">28</div><div class="calendar-cell">29</div><div class="calendar-cell">30</div><div class="calendar-cell muted">1</div><div class="calendar-cell muted">2</div>
+        </div>
+        <div class="label-tag">.calendar-grid · .today · .event</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 FEEDBACK -->
+<section class="lg-section" id="feedback">
+  <div class="container">
+    <span class="lg-eyebrow">11 · Feedback</span>
+    <h2>Alerts <span class="holo-text">& tooltips</span></h2>
+    <p class="lead">Banners contextuels, toast confirmation, tooltips au hover.</p>
+
+    <div class="lg-grid-2" style="gap: 1.5rem;" data-replay>
+      <div class="glass-alert success">
+        <div class="icn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="body"><strong>Déploiement réussi</strong><span>Cluster nimbe-prod · v2.4.1 · 3/3 healthy</span></div>
+      </div>
+      <div class="glass-alert">
+        <div class="icn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="body"><strong>Maintenance programmée</strong><span>Demain 02:00 — fenêtre de 30 min</span></div>
+      </div>
+      <div class="glass-alert warn">
+        <div class="icn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="body"><strong>Quota proche limite</strong><span>API calls 87% du quota mensuel · upgrade conseillé</span></div>
+      </div>
+      <div class="glass-alert error">
+        <div class="icn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+        <div class="body"><strong>Erreur connexion DB</strong><span>postgres-replica-2 unreachable · failover actif</span></div>
+      </div>
+    </div>
+    <div class="label-tag" style="display: block; text-align: center; margin-top: 1rem;">.glass-alert · .success · .warn · .error</div>
+
+    <div style="margin-top: 3rem; display: flex; gap: 2rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+      <div class="glass-toast">
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span style="font-family: var(--font-display); font-weight: 600; font-size: 0.875rem;">Sauvegardé sur le cloud</span>
+      </div>
+      <div class="glass-tooltip">
+        <button class="glass-btn">Hover pour tooltip</button>
+        <span class="glass-tooltip-content">Latence p95 < 50ms en production</span>
+      </div>
+    </div>
+    <div class="label-tag" style="display: block; text-align: center; margin-top: 1rem;">.glass-toast · .glass-tooltip</div>
+  </div>
+</section>
+
+<!-- 12 NAVIGATION -->
+<section class="lg-section" id="nav">
+  <div class="container">
+    <span class="lg-eyebrow">12 · Navigation</span>
+    <h2>Wayfinding <span class="holo-text">subtil</span></h2>
+    <p class="lead">Breadcrumb pill, hamburger animé, dock (cf. Glass Core).</p>
+
+    <div class="lg-grid-2" style="gap: 3rem; align-items: center;" data-replay>
+      <div>
+        <h3>Breadcrumb</h3>
+        <div class="glass-breadcrumb">
+          <a href="#">Cloud</a>
+          <span class="sep">/</span>
+          <a href="#">Région</a>
+          <span class="sep">/</span>
+          <a href="#">Production</a>
+          <span class="sep">/</span>
+          <span class="current">api.nimbe.example</span>
+        </div>
+        <div class="label-tag">.glass-breadcrumb</div>
+      </div>
+
+      <div>
+        <h3>Hamburger animé</h3>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <div class="glass-hamburger" onclick="this.classList.toggle('open')">
+            <span></span><span></span><span></span>
+          </div>
+          <span style="font-size: 0.875rem; color: var(--text-muted);">← Cliquez pour ouvrir/fermer</span>
+        </div>
+        <div class="label-tag">.glass-hamburger · .open</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 UI ELEMENTS -->
+<section class="lg-section" id="ui">
+  <div class="container">
+    <span class="lg-eyebrow">13 · UI Elements</span>
+    <h2>Tags · Progress · Stepper</h2>
+    <p class="lead">Composants UI fondamentaux pour interface complète.</p>
+
+    <div class="lg-grid-2" style="gap: 3rem;" data-replay>
+      <div>
+        <h3>Tags & badges</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          <span class="glass-tag"><span class="dot"></span>Stable</span>
+          <span class="glass-tag primary"><span class="dot"></span>Production</span>
+          <span class="glass-tag accent"><span class="dot"></span>Beta</span>
+          <span class="glass-tag">v2.4.1</span>
+          <span class="glass-tag primary">Cloud</span>
+        </div>
+        <div class="label-tag" style="margin-bottom: 2rem;">.glass-tag</div>
+
+        <h3>Progress bars liquid</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div><div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem;"><span>Migration BDD</span><span style="color: var(--nimbe-blue); font-weight: 700;">72%</span></div><div class="glass-progress"><div class="glass-progress-fill" style="width: 72%;"></div></div></div>
+          <div><div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem;"><span>Couverture API</span><span style="color: var(--nimbe-blue); font-weight: 700;">94%</span></div><div class="glass-progress"><div class="glass-progress-fill" style="width: 94%;"></div></div></div>
+          <div><div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.875rem;"><span>Onboarding</span><span style="color: var(--nimbe-blue); font-weight: 700;">38%</span></div><div class="glass-progress"><div class="glass-progress-fill" style="width: 38%;"></div></div></div>
+        </div>
+        <div class="label-tag">.glass-progress</div>
+      </div>
+
+      <div>
+        <h3>Stepper workflow</h3>
+        <div class="glass-stepper">
+          <div class="step done"><div class="dot">✓</div></div>
+          <div class="line" style="background: linear-gradient(90deg, var(--liquid-blue), var(--liquid-cyan));"></div>
+          <div class="step done"><div class="dot">✓</div></div>
+          <div class="line" style="background: linear-gradient(90deg, var(--liquid-blue), var(--liquid-cyan));"></div>
+          <div class="step current"><div class="dot">3</div></div>
+          <div class="line"></div>
+          <div class="step"><div class="dot">4</div></div>
+          <div class="line"></div>
+          <div class="step"><div class="dot">5</div></div>
+        </div>
+        <div class="label-tag">.glass-stepper</div>
+
+        <h3 style="margin-top: 2.5rem;">Switch sparkle (Uiverse-inspired)</h3>
+        <div style="display: flex; gap: 1.25rem; align-items: center;">
+          <label class="uv-switch-moth">
+            <input type="checkbox" />
+            <div class="uv-switch-moth-track">
+              <div class="uv-switch-moth-knob">
+                <span class="uv-switch-moth-spark" style="--deg:25; --duration:11;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:100; --duration:18;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:280; --duration:5;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:200; --duration:3;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:30; --duration:20;"></span>
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+              </div>
+            </div>
+          </label>
+          <label class="uv-switch-moth">
+            <input type="checkbox" checked />
+            <div class="uv-switch-moth-track">
+              <div class="uv-switch-moth-knob">
+                <span class="uv-switch-moth-spark" style="--deg:135; --duration:9;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:45; --duration:4;"></span>
+                <span class="uv-switch-moth-spark" style="--deg:78; --duration:16;"></span>
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="label-tag">.uv-switch-moth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 AURORA CARD -->
+<section class="lg-section" id="aurora">
+  <div class="container">
+    <span class="lg-eyebrow">14 · Aurora Card</span>
+    <h2>Hero <span class="holo-text">aurora</span></h2>
+    <p class="lead">Backdrop animé pour CTA, sections d'impact, slide break.</p>
+
+    <div class="aurora-card" style="text-align: center;" data-replay>
+      <div class="aurora-bg"></div>
+      <span class="lg-eyebrow"><span class="dot"></span>Cloud Privé</span>
+      <h2 style="margin-bottom: 1rem;">Performance <span class="holo-text">durable</span></h2>
+      <p style="color: var(--text-muted); max-width: 50ch; margin: 0 auto 2rem;">Données hébergées en propre, conforme RGPD, infrastructure verte.</p>
+      <button class="glass-btn primary">Découvrir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- 15 CARDS SHOWCASE UIVERSE -->
+<section class="lg-section" id="uv-cards">
+  <div class="container">
+    <span class="lg-eyebrow">15 · Cartes Showcase Uiverse</span>
+    <h2><span class="holo-text">18</span> cartes adaptées</h2>
+    <p class="lead">Cartes Uiverse réinterprétées au style Nimbe : couleurs glass, theme-aware, hover signatures préservés.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; align-items: center; justify-items: center;" data-replay>
+      <div class="demo-cell">
+        <div class="uv-card-vampirebat">
+          <div class="uv-card-vampirebat-heading">Open-Source <span>Galaxy</span></div>
+          <div class="uv-card-vampirebat-content">
+            <div class="uv-card-vampirebat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg><span>Create</span></div>
+            <div class="uv-card-vampirebat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><span>Post</span></div>
+            <div class="uv-card-vampirebat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg><span>Inspire</span></div>
+          </div>
+          <button>Code to Infinity!</button>
+        </div>
+        <div class="label-tag">.uv-card-vampirebat</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-eagle">
+          <div class="uv-card-eagle-logo">SOCIALS</div>
+          <a class="uv-card-eagle-box b1" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3a6 6 0 0 0-6 6v6a6 6 0 0 0 6 6h6a6 6 0 0 0 6-6V9a6 6 0 0 0-6-6H9zm3 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm5-1a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
+          <a class="uv-card-eagle-box b2" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.5-2.3.7.8-.5 1.5-1.3 1.8-2.2-.8.5-1.7.8-2.5 1A4 4 0 0 0 12 9v.5C8.6 9.4 5.5 7.7 3.6 5.4 2 8.3 3 12 5.5 13.7c-.7 0-1.3-.2-2-.5 0 2.7 2 5 4.5 5.5-.7.2-1.4.2-2 0a4 4 0 0 0 3.7 2.8C7 22.7 4.5 23.3 2 23a11.6 11.6 0 0 0 6.3 1.8c7.6 0 11.7-6.4 11.7-11.7v-.6A8.3 8.3 0 0 0 22 5.8z"/></svg></a>
+          <a class="uv-card-eagle-box b3" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0L12 11 4 6h16zm0 12H4V8l8 5 8-5v10z"/></svg></a>
+          <div class="uv-card-eagle-box b4"></div>
+        </div>
+        <div class="label-tag">.uv-card-eagle</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-elephant">
+          <div class="uv-card-elephant-info">MAGIC</div>
+        </div>
+        <div class="label-tag">.uv-card-elephant</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-newt">
+          <div class="uv-card-newt-mask"></div>
+          <div class="uv-card-newt-content">
+            <p class="title">Designer<br><span>Famous Creative</span></p>
+            <ul class="uv-card-newt-sci" style="list-style:none; padding:0; display:flex; gap:0.5rem; margin-top:1rem;">
+              <li><a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9V14H7v-2h3.5V9.5a3.5 3.5 0 0 1 3.7-3.7c1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12H17l-.5 2H13v7.9c4.6-.7 9-4.7 9-9.9z"/></svg></a></li>
+              <li><a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.2-.8.5-1.7.8-2.6 1A4 4 0 0 0 12 9v.5C8.6 9.4 5.5 7.7 3.6 5.4 2 8.3 3 12 5.5 13.7c-.7 0-1.3-.2-1.9-.5 0 2.6 1.9 4.9 4.4 5.4-.6.2-1.3.2-2 .1.6 1.7 2.2 3 4.1 3A8.4 8.4 0 0 1 4 23c1.9 1.2 4.2 1.9 6.7 1.9 8 0 12.4-6.6 12.4-12.4v-.6c.9-.6 1.7-1.4 2.3-2.3z"/></svg></a></li>
+              <li><a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.3 18V10H5.7v8h2.6zM7 8.6c.9 0 1.5-.6 1.5-1.5S7.9 5.6 7 5.6s-1.5.6-1.5 1.5S6.1 8.6 7 8.6zm11 9.4v-4.6c0-2.4-1.3-3.5-3.1-3.5-1.4 0-2 .8-2.4 1.4V10H10v8h2.6v-4.4c0-1.2.4-2 1.5-2 1 0 1.4.7 1.4 2V18H18z"/></svg></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-newt</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-fly">
+          <p class="uv-card-fly-heading">Popular this month</p>
+          <p>Powered By</p>
+          <p class="uv-card-fly-tag">Nimbe Cloud</p>
+        </div>
+        <div class="label-tag">.uv-card-fly</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-cyber">
+          <div class="uv-card-cyber-lines"><span></span><span></span><span></span></div>
+          <div class="uv-card-cyber-content">
+            <div class="uv-card-cyber-prompt">HOVER ME</div>
+            <div class="uv-card-cyber-title">CYBER<br>CARD</div>
+            <div class="uv-card-cyber-subtitle">
+              <span>INTERACTIVE</span>
+              <span class="highlight">3D EFFECT</span>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-cyber</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-lionfish">
+          <div class="uv-card-lionfish-dots"><span></span><span></span><span></span></div>
+          <h3>HOVER ME</h3>
+          <p>Carte qui se déplie pour révéler son contenu — accent premium.</p>
+        </div>
+        <div class="label-tag">.uv-card-lionfish</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-treefrog">
+          <div class="uv-card-treefrog-phone">
+            <div class="uv-card-treefrog-menu"><span>9:41</span><span>●●●</span></div>
+            <div class="uv-card-treefrog-content">
+              <div class="uv-card-treefrog-circle"></div>
+              <div class="uv-card-treefrog-toggle"></div>
+              <div style="display:flex; gap:1.25rem; font-family:var(--font-display); font-size:0.75rem; color:var(--text-muted);"><span>Light</span><span>Dark</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-treefrog</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-robin">
+          <div class="uv-card-robin-content">
+            <div class="uv-card-robin-back">
+              <div class="uv-card-robin-back-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+                <strong>Hover Me</strong>
+              </div>
+            </div>
+            <div class="uv-card-robin-front">
+              <div class="uv-card-robin-front-inner">
+                <span class="badge">Région</span>
+                <p class="title">Cloud Privé</p>
+                <p class="meta">Datacenter · Tier 3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-robin</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-liger">
+          <div class="uv-card-liger-inner">
+            <div class="uv-card-liger-glass"></div>
+            <div class="uv-card-liger-content">
+              <span class="title">Nimbe 3D</span>
+              <span class="text">Carte 3D qui s'incline au hover. Effet press signature.</span>
+            </div>
+            <div class="uv-card-liger-bottom">
+              <div class="uv-card-liger-social">
+                <button><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></button>
+                <button><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></button>
+                <button><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4v16m8-8H4"/></svg></button>
+              </div>
+              <button class="uv-card-liger-view">View more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-liger</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-rat">
+          <div class="uv-card-rat-border"></div>
+          <div class="uv-card-rat-content">
+            <div class="uv-card-rat-logo">Nimbe</div>
+            <span class="uv-card-rat-text">Cloud &amp; Infra</span>
+          </div>
+          <div class="uv-card-rat-bottom">CLOUD · PRO</div>
+        </div>
+        <div class="label-tag">.uv-card-rat</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-dingo">
+          <div class="uv-card-dingo-top">
+            <div class="icon-spot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></div>
+            <div>
+              <div class="main">28°C</div>
+              <div class="mainsub">Métropole</div>
+            </div>
+          </div>
+          <div class="uv-card-dingo-extras">
+            <div class="uv-card-dingo-extras-row"><div>Humidité<strong>65%</strong></div><div>Vent<strong>12 km/h</strong></div></div>
+            <div class="uv-card-dingo-extras-row"><div>UV<strong>7</strong></div><div>Pression<strong>1015 hPa</strong></div></div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-dingo</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-owl">
+          <div class="uv-card-owl-dot"></div>
+          <div class="uv-card-owl-inner">
+            <div class="uv-card-owl-ray"></div>
+            <div class="uv-card-owl-text">847K</div>
+            <div style="font-family:var(--font-display); font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem;">Sessions</div>
+            <div class="uv-card-owl-line h top"></div>
+            <div class="uv-card-owl-line h bottom"></div>
+            <div class="uv-card-owl-line v left"></div>
+            <div class="uv-card-owl-line v right"></div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-owl</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-eagle dark">
+          <div class="uv-card-eagle-logo">CLOUD</div>
+          <a class="uv-card-eagle-box b1" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></a>
+          <a class="uv-card-eagle-box b2" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></a>
+          <a class="uv-card-eagle-box b3" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <div class="uv-card-eagle-box b4"></div>
+        </div>
+        <div class="label-tag">.uv-card-eagle.dark</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-dodo">
+          <div class="uv-card-dodo-content">Hover me!</div>
+        </div>
+        <div class="label-tag">.uv-card-dodo</div>
+      </div>
+
+      <div class="demo-cell" style="grid-column: span 2;">
+        <div class="uv-card-lion">
+          <div class="uv-card-lion-glass" data-text="Github" style="--r:-15;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.6 5.63.6 11.9c0 5.02 3.26 9.27 7.78 10.78.57.1.78-.25.78-.55v-2c-3.17.7-3.84-1.36-3.84-1.36-.52-1.31-1.27-1.66-1.27-1.66-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.52-2.53-.29-5.19-1.27-5.19-5.62 0-1.24.44-2.26 1.17-3.05-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.38.97 0 1.95.13 2.86.38 2.18-1.48 3.14-1.17 3.14-1.17.62 1.57.23 2.73.11 3.02.73.79 1.17 1.81 1.17 3.05 0 4.36-2.66 5.32-5.2 5.6.41.36.78 1.06.78 2.14v3.18c0 .31.21.66.79.55 4.51-1.5 7.78-5.76 7.78-10.78C23.4 5.63 18.27.5 12 .5z"/></svg>
+          </div>
+          <div class="uv-card-lion-glass" data-text="Code" style="--r:5;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M16 17.5L21.5 12 16 6.5l-1.4 1.4 4.1 4.1-4.1 4.1z"/><path d="M8 17.5L2.5 12 8 6.5l1.4 1.4-4.1 4.1 4.1 4.1z"/></svg>
+          </div>
+          <div class="uv-card-lion-glass" data-text="Earn" style="--r:25;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 6 7 1-5 5 1 7-6-3-6 3 1-7L2 8l7-1z"/></svg>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-lion</div>
+      </div>
+
+      <div class="demo-cell" style="grid-column: span 2;">
+        <div class="uv-card-lizard">
+          <div class="uv-card-lizard-inner">
+            <div class="uv-card-lizard-front">
+              <span class="uv-card-lizard-heading">Nimbe</span>
+              <div class="uv-card-lizard-chip"></div>
+              <div class="uv-card-lizard-number">5234 9876 1234 0001</div>
+              <div class="uv-card-lizard-bottom"><span>VALID THRU<br><strong>12/27</strong></span><span>HOLDER<br><strong>A. DUPONT</strong></span></div>
+            </div>
+            <div class="uv-card-lizard-back">
+              <div class="uv-card-lizard-strip"></div>
+              <div class="uv-card-lizard-strip-light"></div>
+              <span class="uv-card-lizard-heading" style="text-align:right; align-self:flex-end;">CVV 123</span>
+            </div>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-lizard</div>
+      </div>
+
+      <div class="demo-cell">
+        <div class="uv-card-soft-dingo">
+          <div class="uv-card-soft-dingo-orb"></div>
+          <div class="uv-card-soft-dingo-stars">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="label-tag">.uv-card-soft-dingo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 PATTERNS BACKGROUNDS -->
+<section class="lg-section" id="uv-patterns">
+  <div class="container">
+    <span class="lg-eyebrow">16 · Patterns Backgrounds</span>
+    <h2>Backgrounds <span class="holo-text">animés</span></h2>
+    <p class="lead">Patterns CSS pour décorer slides, hero sections, fond de carte. Animation infinie, performance CSS pure.</p>
+
+    <div class="lg-grid-3" style="gap: 1.5rem;" data-replay>
+      <div class="demo-cell" style="height: 280px; padding: 0;">
+        <div class="uv-pattern-dolphin" style="width: 100%; height: 100%;"></div>
+        <div class="label-tag" style="margin-top: 0.75rem;">.uv-pattern-dolphin · rain blur</div>
+      </div>
+      <div class="demo-cell" style="height: 280px; padding: 0;">
+        <div class="uv-pattern-earwig79" style="width: 100%; height: 100%;"></div>
+        <div class="label-tag" style="margin-top: 0.75rem;">.uv-pattern-earwig79 · grid</div>
+      </div>
+      <div class="demo-cell" style="height: 280px; padding: 0;">
+        <div class="uv-pattern-lion" style="width: 100%; height: 100%;"></div>
+        <div class="label-tag" style="margin-top: 0.75rem;">.uv-pattern-lion · rain hue-rotate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 DECK PATTERNS (Phase 3 — ADN du système de présentation) -->
+<section class="lg-section" id="deck-patterns">
+  <div class="container">
+    <span class="lg-eyebrow">17 · Deck Patterns</span>
+    <h2>Slides condensées, <span class="holo-text">détails à la demande</span></h2>
+    <p class="lead">Trois patterns réutilisables qui forment l'ADN des decks Nimbe : sidebar lexique, overlays glass on-demand, navigation IntersectionObserver. Cliquez sur les cartes ci-dessous pour voir les overlays en action.</p>
+
+    <div class="lg-grid-3" style="gap: 1.5rem; margin-top: 2rem;" data-replay>
+      <div class="glass-card-liquid" data-overlay-open="demo-overlay-llm" style="cursor: pointer;">
+        <h3 style="margin: 0 0 0.5rem;">LLM</h3>
+        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Modèles de langage</p>
+        <div class="label-tag" style="margin-top: 1rem;">click → overlay détail</div>
+      </div>
+      <div class="glass-card-liquid" data-overlay-open="demo-overlay-quantum" style="cursor: pointer;">
+        <h3 style="margin: 0 0 0.5rem;">Quantique</h3>
+        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Calcul post-classique</p>
+        <div class="label-tag" style="margin-top: 1rem;">click → overlay détail</div>
+      </div>
+      <div class="glass-card-liquid" data-overlay-open="demo-overlay-fusion" style="cursor: pointer;">
+        <h3 style="margin: 0 0 0.5rem;">Fusion</h3>
+        <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">Énergie illimitée</p>
+        <div class="label-tag" style="margin-top: 1rem;">click → overlay détail</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 1.5rem; background: var(--glass-tint); border: 1px solid var(--glass-border); border-radius: var(--radius-lg);">
+      <h3 style="margin: 0 0 0.5rem; color: var(--nimbe-blue);">Activation</h3>
+      <p style="color: var(--text-muted); margin: 0 0 1rem; font-size: 0.9rem;">Inclure <code>nimbe-deck-helpers.js</code> + appeler <code>NimbeDeck.init()</code>. Voir <a href="COMPONENTS.md" style="color: var(--nimbe-blue);">COMPONENTS.md</a> sections 9, 10, 11.</p>
+      <pre style="background: var(--bg-elevated); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.8rem; margin: 0;"><code>&lt;link rel="stylesheet" href="liquid-glass-extended.css"&gt;
+&lt;script src="nimbe-deck-helpers.js"&gt;&lt;/script&gt;
+&lt;script&gt;NimbeDeck.init();&lt;/script&gt;</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Demo overlays for Section 17 -->
+<div class="overlay-glass" id="demo-overlay-llm" role="dialog" aria-modal="true" hidden>
+  <button class="overlay-close" aria-label="Fermer">×</button>
+  <div class="overlay-content">
+    <h2>Large Language Models</h2>
+    <p>Les LLM sont des réseaux neuronaux entraînés sur d'immenses corpus textuels pour modéliser la distribution probabiliste du langage. Ils permettent génération, traduction, résumé, raisonnement.</p>
+    <h3>Acteurs majeurs</h3>
+    <ul style="padding-left: 1.25rem; line-height: 1.8;">
+      <li><strong>OpenAI</strong> — GPT-4o, o1 (raisonnement)</li>
+      <li><strong>Anthropic</strong> — Claude 4.7 Opus / Sonnet</li>
+      <li><strong>Google DeepMind</strong> — Gemini 2 Pro</li>
+      <li><strong>Mistral AI</strong> — modèles open-weight souverains</li>
+    </ul>
+    <h3>Usage type</h3>
+    <p>Les LLM motorisent les agents Claude Code utilisés en interne pour automatiser le développement, la documentation, les présentations, et l'orchestration multi-projets.</p>
+  </div>
+</div>
+
+<div class="overlay-glass" id="demo-overlay-quantum" role="dialog" aria-modal="true" hidden>
+  <button class="overlay-close" aria-label="Fermer">×</button>
+  <div class="overlay-content">
+    <h2>Calcul quantique</h2>
+    <p>L'informatique quantique exploite les phénomènes de superposition et d'intrication pour résoudre certaines classes de problèmes en temps polynomial là où les machines classiques sont exponentielles.</p>
+    <h3>Algorithmes clés</h3>
+    <ul style="padding-left: 1.25rem; line-height: 1.8;">
+      <li><strong>Shor</strong> — factorisation entière (casse RSA)</li>
+      <li><strong>Grover</strong> — recherche non structurée (accélération √N)</li>
+      <li><strong>VQE / QAOA</strong> — optimisation hybride classique-quantique</li>
+    </ul>
+    <h3>Horizon</h3>
+    <p>Systèmes commerciaux fault-tolerant attendus 2027-2030. Risque "Harvest Now, Decrypt Later" déjà actif sur les archives chiffrées RSA/ECC sensibles.</p>
+  </div>
+</div>
+
+<div class="overlay-glass" id="demo-overlay-fusion" role="dialog" aria-modal="true" hidden>
+  <button class="overlay-close" aria-label="Fermer">×</button>
+  <div class="overlay-content">
+    <h2>Fusion nucléaire</h2>
+    <p>Reproduction sur Terre des réactions stellaires : fusionner deutérium et tritium pour libérer une énergie 4× supérieure à la fission, sans déchets longue durée ni risque d'emballement.</p>
+    <h3>Acteurs</h3>
+    <ul style="padding-left: 1.25rem; line-height: 1.8;">
+      <li><strong>Commonwealth Fusion Systems</strong> — SPARC tokamak compact 2026</li>
+      <li><strong>Helion Energy</strong> — pulse fusion, contrat Microsoft 2028</li>
+      <li><strong>TAE Technologies</strong> — boron-11 aneutronique</li>
+      <li><strong>ITER</strong> — international, première plasma deutérium 2035</li>
+    </ul>
+    <h3>Implication IA</h3>
+    <p>L'IA est aujourd'hui contrainte par l'énergie disponible (~5% de la conso US prévue pour les datacenters d'ici 2030). Énergie quasi-illimitée = modèles quasi-illimités.</p>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<section class="hero">
+  <div class="aurora-bg"></div>
+  <span class="lg-eyebrow">END · v3.0 LIQUID GLASS</span>
+  <h1 class="holo-text">~50 composants signature Nimbe</h1>
+  <p>Activation : <code style="background: var(--glass-tint-strong); padding: 0.125rem 0.5rem; border-radius: 4px; color: var(--nimbe-blue); backdrop-filter: blur(8px);">liquid-glass.css</code> + <code style="background: var(--glass-tint-strong); padding: 0.125rem 0.5rem; border-radius: 4px; color: var(--nimbe-blue); backdrop-filter: blur(8px);">liquid-glass-extended.css</code></p>
+  <div class="cta">
+    <a href="../golden/LIQUID-GLASS-STANDARD-v2.html" class="glass-btn">Standard du verre</a>
+    <a href="COMPONENTS.md" class="glass-btn primary">Doc API</a>
+  </div>
+</section>
+
+<script>
+  const KEY = 'nimbe-liquid-glass-theme';
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem(KEY);
+  if (saved) root.setAttribute('data-theme', saved);
+  function syncIcons() {
+    const t = root.getAttribute('data-theme') || 'dark';
+    toggle.querySelector('.icon-moon').style.display = t === 'light' ? 'block' : 'none';
+    toggle.querySelector('.icon-sun').style.display = t === 'light' ? 'none' : 'block';
+  }
+  syncIcons();
+  toggle.addEventListener('click', () => {
+    root.classList.add('theme-transitioning');
+    void root.offsetHeight;
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem(KEY, next);
+    syncIcons();
+    setTimeout(() => root.classList.remove('theme-transitioning'), 250);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const targets = [entry.target];
+      entry.target.querySelectorAll('.chart-bar-v2, .donut-v2, .gauge-v2').forEach(el => targets.push(el));
+      targets.forEach(el => {
+        if (entry.isIntersecting) el.classList.add('in-view');
+        else if (entry.boundingClientRect.top > 0) el.classList.remove('in-view');
+      });
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('[data-replay], .chart-bar-v2, .donut-v2, .gauge-v2, .pie-v2').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.glass-range').forEach(r => r.style.setProperty('--range-pct', r.value + '%'));
+</script>
+
+<!-- Phase 3 deck patterns library + overlay activation for Section 17 demo -->
+<script src="nimbe-deck-helpers.js"></script>
+<script>NimbeDeck.setupOverlays();</script>
+
+</body>
+</html>

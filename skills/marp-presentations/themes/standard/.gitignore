@@ -1,0 +1,7 @@
+# Auto-generated files
+__pycache__/
+_screenshots/
+*.pyc
+
+# Rendered Marp output (regenerated via `marp ... + marp_postprocess.py`)
+charte-graphique.html
