@@ -1,10 +1,10 @@
 ---
-description: 'Initialise BMAD + Update/Followup + Agent Browser + ATeam + Ralph + VPS/FAL/CF/Excal/Deploy (optionnels) dans le projet courant'
+description: 'Initialise BMAD + Update/Followup + Agent Browser + ATeam + VPS/FAL/CF/Excal/Deploy (optionnels) dans le projet courant'
 ---
 
 # /orni-init-full - Initialisation complète Orni-Skills
 
-Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/Followup, Agent Browser, ATeam, Mailbox, Ralph et VPS/FAL/CF/EX/Deploy (optionnels).
+Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/Followup, Agent Browser, ATeam, Mailbox et VPS/FAL/CF/EX/Deploy (optionnels).
 
 ## Instructions
 
@@ -76,7 +76,7 @@ Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/
    | `mcp` | Playwright MCP Server uniquement |
    | `none` | Pas d'interaction browser |
 
-5. **Installer dans l'ordre:** BMAD -> UF -> AB -> AT -> ML -> Ralph/extras -> VPS/FAL (optionnels)
+5. **Installer dans l'ordre:** BMAD -> UF -> AB -> AT -> ML -> extras -> VPS/FAL (optionnels)
 
    **5a. Module BMAD (via CLI officiel):**
    ```bash
@@ -106,8 +106,7 @@ Initialise tous les composants Orni-Skills dans le projet courant: BMAD, Update/
    - Copier skill `mailbox/` (SKILL.md, README.md)
    - Résoudre le slug projet et créer la mailbox : `mkdir -p ~/.claude/mailbox/{slug}/inbox` + `archive/`
 
-   **5d. Extras (Ralph + settings + meta-commandes orni):**
-   - Copier le skill ralph-workflow/
+   **5d. Extras (settings + meta-commandes orni):**
    - Copier settings-template.json
    - Copier toutes les meta-commandes `{ORNI}/commands/orni-*.md` vers `.claude/commands/` (orni-help, orni-checkup, orni-init-*, orni-update-*)
 

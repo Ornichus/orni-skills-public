@@ -46,7 +46,6 @@ Scanne les composants Orni installés dans le projet courant, compare avec la so
    | Followup Doctor | UF | `.claude/commands/followup-doctor.md` | `~/.claude/commands/followup-doctor.md` | `commands/followup-doctor.md` |
    | Structure | STR | `.claude/commands/structure.md` | `~/.claude/commands/structure.md` | `commands/structure.md` |
    | Project State Mgmt | PSM | `.claude/skills/project-state-management/SKILL.md` | `~/.claude/skills/project-state-management/SKILL.md` | `skills/project-state-management/SKILL.md` |
-   | Ralph Workflow | RW | `.claude/skills/ralph-workflow/SKILL.md` | `~/.claude/skills/ralph-workflow/SKILL.md` | `skills/ralph-workflow/SKILL.md` |
    | VPS Management | VPS | `.claude/skills/vps/SKILL.md` | `~/.claude/skills/vps/SKILL.md` | `skills/vps/SKILL.md` |
    | Fal Image Gen | FAL | `.claude/skills/fal-image-gen/SKILL.md` | config `fal-image-gen` dans `~/.claude/settings.json` | `skills/fal-image-gen/SKILL.md` |
    | Cloudflare | CF | `.claude/skills/cloudflare/SKILL.md` | `~/.claude/cloudflare.json` | `skills/cloudflare/SKILL.md` |

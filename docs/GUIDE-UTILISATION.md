@@ -138,7 +138,7 @@ Orni-Skills est modulaire. Chaque projet installe uniquement les modules dont il
 ### Installation complète (recommandée)
 
 ```bash
-/orni-init-full   # bootstrap BMAD + UF + AB + AT + ML + Ralph + opt-in (VPS/FAL/CF/EX/DPL/FS/DS/WPC) + MP/AR/PSS par défaut
+/orni-init-full   # bootstrap BMAD + UF + AB + AT + ML + opt-in (VPS/FAL/CF/EX/DPL/FS/DS/WPC) + MP/AR/PSS par défaut
 ```
 
 ### Catalogue modules — par catégorie

@@ -1,11 +1,11 @@
-# /setup-agent-browser - Configurer Agent-Browser pour Ralphy sur Windows/WSL
+# /setup-agent-browser - Configurer Agent-Browser sur Windows/WSL
 
 ## Contexte
 
-Ralphy avec `--browser` necessite agent-browser de Vercel. Sur Windows, il y a deux obstacles:
+`agent-browser` (Vercel) permet l'automatisation navigateur — directement via Claude Code, ou dans une **boucle autonome**. Sur Windows, il y a deux obstacles :
+
 1. **agent-browser** s'execute dans **WSL Ubuntu**, pas Windows
-2. **Ralphy** (Bun) detecte l'outil via `where agent-browser` (PATH Windows natif)
-3. **Claude Code** execute les commandes via **Git Bash** (`/usr/bin/bash`)
+2. **Claude Code** (et les lanceurs de boucle autonome cote Windows) detectent l'outil via `where agent-browser` (PATH Windows natif) et l'executent via **Git Bash** (`/usr/bin/bash`)
 
 Il faut creer des wrappers dans un dossier present dans le PATH Windows **natif** (ex: `.local/bin`).
 
@@ -44,10 +44,10 @@ mkdir -p "$HOME/.local/bin"
 ```
 
 > **IMPORTANT**: Ne PAS utiliser `~/bin` seul. Ce dossier est visible par Git Bash
-> mais souvent absent du PATH Windows natif. Ralphy utilise `where agent-browser`
-> via Bun qui ne voit que le PATH Windows.
+> mais souvent absent du PATH Windows natif. La detection via `where agent-browser`
+> ne voit que le PATH Windows.
 
-### 4. Creer le wrapper Bash (CRITIQUE pour Ralphy/Claude Code)
+### 4. Creer le wrapper Bash (CRITIQUE pour Git Bash/Claude Code)
 
 ```bash
 cat > "$HOME/.local/bin/agent-browser" << 'EOF'
@@ -66,10 +66,10 @@ wsl.exe -d Ubuntu -- npx agent-browser %*
 EOF
 ```
 
-### 6. Verifier la detection par Ralphy
+### 6. Verifier la detection
 
 ```powershell
-# Simuler exactement ce que Ralphy fait (execution/browser.ts)
+# Simuler exactement ce que fait un lanceur Windows natif
 where.exe agent-browser
 # DOIT afficher le chemin. Si "not found" → le dossier n'est pas dans le PATH Windows
 ```
@@ -92,17 +92,13 @@ agent-browser open https://example.com
 agent-browser snapshot -i
 agent-browser screenshot /tmp/test-setup.png
 agent-browser close
-
-# Test 4: Ralphy dry-run
-ralphy --browser --dry-run "test agent-browser"
-# Attendu: [INFO] Browser automation enabled (agent-browser)
 ```
 
 ## Criteres de succes
 
 - [ ] `agent-browser --version` fonctionne dans Git Bash
 - [ ] `agent-browser --version` fonctionne dans PowerShell
-- [ ] `ralphy --browser --dry-run "test"` affiche "Browser automation enabled"
+- [ ] `where.exe agent-browser` affiche le chemin du wrapper (PATH Windows natif)
 - [ ] Screenshot de test cree avec succes
 
 ## Depannage
@@ -123,13 +119,13 @@ Installer Chromium: `wsl.exe -d Ubuntu -- npx agent-browser install`
 ## Architecture finale
 
 ```
-Ralphy --browser
+Boucle autonome / Claude Code
     |
     v
 Git Bash (/usr/bin/bash)
     |
     v
-~/bin/agent-browser (script bash)
+~/.local/bin/agent-browser (script bash)
     |
     v
 wsl.exe -d Ubuntu -- npx agent-browser
@@ -142,4 +138,3 @@ WSL Ubuntu -> Chromium headless
 
 - Documentation complete: docs/AGENT-BROWSER-WINDOWS-WSL.md
 - agent-browser GitHub: https://github.com/vercel-labs/agent-browser
-- Ralphy GitHub: https://github.com/michaelshimeles/ralphy

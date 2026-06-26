@@ -23,7 +23,6 @@ Met à jour tous les composants Orni-Skills installés dans le projet courant.
      - AB: `.claude/commands/setup-agent-browser.md`
      - AT: `.claude/commands/ateam.md`
      - ML: `.claude/commands/mail-send.md`
-     - Ralph: `.claude/skills/ralph-workflow/SKILL.md`
      - VPS: `.claude/skills/vps/SKILL.md`
      - FAL: `.claude/skills/fal-image-gen/SKILL.md`
      - CF: `.claude/skills/cloudflare/SKILL.md`
@@ -61,10 +60,9 @@ Met à jour tous les composants Orni-Skills installés dans le projet courant.
    - Copier skill `mailbox/` en écrasement (SKILL.md, README.md)
    - NE PAS TOUCHER aux messages dans `~/.claude/mailbox/`
 
-   **4d. Ralph/extras (si installé):**
-   - Copier le skill ralph-workflow/
+   **4d. Extras (settings + meta-commandes orni):**
    - Copier settings-template.json
-   - Copier/mettre à jour toutes les meta-commandes `{ORNI}/commands/orni-*.md` vers `.claude/commands/` (toujours, même si Ralph absent)
+   - Copier/mettre à jour toutes les meta-commandes `{ORNI}/commands/orni-*.md` vers `.claude/commands/` (toujours)
 
    **4e. VPS (si installé):**
    - Copier le skill `vps/` en écrasement (SKILL.md)

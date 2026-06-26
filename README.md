@@ -3,7 +3,9 @@
 Bibliothèque modulaire de **skills, commandes et workflows pour Claude Code**.
 Chaque module s'installe dans un projet via une commande `/orni-init-*` et se met à jour via `/orni-update-*`.
 
-> 📖 **Nouveau ici ?** Commence par le **[Guide d'utilisation](docs/GUIDE-UTILISATION.md)** — il explique en 5 minutes comment utiliser Orni-Skills au quotidien.
+## ▶ Démarrage rapide
+
+**Nouveau ici ?** Lis le **[Guide d'utilisation](docs/GUIDE-UTILISATION.md)** — il explique en 5 minutes comment utiliser Orni-Skills au quotidien (installer un module, le protocole `/update` + `/followup`, le workflow type).
 
 ## Modules disponibles
 
@@ -14,7 +16,6 @@ Chaque module s'installe dans un projet via une commande `/orni-init-*` et se me
 | **Mailbox** | ML | Messagerie inter-projets (sync, live-talk, conférence multi-agents) |
 | **Agent Browser** | AB | Automatisation navigateur via `agent-browser` (Windows/WSL) |
 | **Update / Followup** | UF | Synchronisation Archon MCP + état projet + diagnostic |
-| **Ralph Workflow** | RW | Validation PRD + boucle autonome |
 | **Project State** | PSM | Gestion de `project-state.xml` |
 | **Project Status Snapshot** | PSS | Rapport d'état condensé (JSON + format humain 4 sections) |
 | **Structure** | STR | Restructureur de prompt professionnel |
@@ -43,6 +44,8 @@ Le dossier `_bmad/` embarque par ailleurs le framework **BMAD** (Module Builder,
 # Installer un module spécifique
 /orni-init-archi    # Architecture
 /orni-init-at       # ATeam
+/orni-init-ab       # Agent Browser
+/orni-init-psm      # Project State Management
 /orni-init-ml       # Mailbox
 /orni-init-deploy   # Deploy
 /orni-init-vps      # VPS

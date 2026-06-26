@@ -74,7 +74,6 @@ Afficher le catalogue ci-dessous en remplacant chaque `{status}` par :
 | {status} | `agent-browser` | Agent Browser — navigation web automatisee |
 | {status} | `project-state-management` | Project State — gestion du contexte projet |
 | {status} | `project-status-snapshot` | Project Status Snapshot — snapshot condense JSON + rapport humain |
-| {status} | `ralph-workflow` | Ralph Workflow — PRD validation & boucle autonome |
 | {status} | `marp-presentations` | Marp Presentations — decks Markdown reproductibles (HTML/PDF/PPTX) |
 | {status} | `frontend-slides` | Frontend Slides — decks HTML one-shot premium (12 styles curates) |
 | {status} | `design-system` | Design System — extract brand -> HTML scrollable + brand-book-a4.pdf |
@@ -100,6 +99,7 @@ Ces commandes sont toujours disponibles depuis le repo Orni-Skills :
 | Update/Followup | `/orni-init-uf` | `/orni-update-uf` |
 | Agent Browser | `/orni-init-ab` | `/orni-update-ab` |
 | ATeam | `/orni-init-at` | `/orni-update-at` |
+| Project State Mgmt | `/orni-init-psm` | `/orni-update-psm` |
 | VPS | `/orni-init-vps` | `/orni-update-vps` |
 | Cloudflare | `/orni-init-cf` | `/orni-update-cf` |
 | Deploy & Publish | `/orni-init-deploy` | `/orni-update-deploy` |

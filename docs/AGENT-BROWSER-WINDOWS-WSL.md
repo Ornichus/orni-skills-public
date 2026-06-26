@@ -4,9 +4,9 @@ Guide de configuration pour utiliser [agent-browser](https://github.com/vercel-l
 
 ## Probleme
 
-Sur Windows, Ralphy avec `--browser` echoue car:
+Sur Windows, l'automatisation navigateur en boucle autonome echoue car:
 - `agent-browser` s'execute dans **WSL/Ubuntu**
-- Ralphy s'execute dans **Windows/PowerShell**
+- Le lanceur de boucle autonome (et Claude Code) s'executent cote **Windows**
 - Les commandes ne sont pas trouvees depuis Windows
 
 ```
@@ -34,9 +34,9 @@ wsl.exe -d Ubuntu -- npx agent-browser --version
 
 ### 3. Creer les wrappers (IMPORTANT: 2 fichiers necessaires)
 
-Ralphy utilise **Git Bash** (`/usr/bin/bash`), pas cmd.exe. Il faut donc **deux wrappers**.
+Claude Code utilise **Git Bash** (`/usr/bin/bash`), pas cmd.exe. Il faut donc **deux wrappers**.
 
-> **CRITIQUE - Choix du dossier**: Ralphy (via Bun) utilise `where agent-browser` pour detecter
+> **CRITIQUE - Choix du dossier**: les lanceurs Windows natifs utilisent `where agent-browser` pour detecter
 > l'outil. `where` ne cherche que dans le **PATH Windows natif**. Le dossier `~/bin` est visible
 > par Git Bash mais souvent **absent du PATH Windows**. Utilisez un dossier deja dans le PATH
 > Windows comme `C:\Users\<USERNAME>\.local\bin`.
@@ -53,7 +53,7 @@ Ralphy utilise **Git Bash** (`/usr/bin/bash`), pas cmd.exe. Il faut donc **deux 
 # C:\Users\<USERNAME>\.bun\bin
 ```
 
-#### Wrapper Bash (pour Ralphy/Git Bash/Claude Code)
+#### Wrapper Bash (pour Git Bash/Claude Code)
 
 Creer `C:\Users\<USERNAME>\.local\bin\agent-browser` (sans extension):
 
@@ -79,13 +79,13 @@ wsl.exe -d Ubuntu -- npx agent-browser %*
 
 > **Important**: Utiliser `wsl.exe` (pas `wsl`) pour la compatibilite.
 
-### 4. Verifier la detection par Ralphy
+### 4. Verifier la detection
 
-Ralphy utilise `where agent-browser` (via Bun/Node.js `execSync`) pour detecter l'outil.
+Les lanceurs Windows natifs utilisent `where agent-browser` pour detecter l'outil.
 Ce check doit reussir sinon le flag `--browser` est ignore silencieusement.
 
 ```powershell
-# Ce test simule exactement ce que Ralphy fait
+# Ce test simule exactement ce que fait un lanceur Windows natif
 where.exe agent-browser
 # Doit afficher le chemin vers le wrapper
 
@@ -112,8 +112,8 @@ agent-browser close
 │  Windows                                                       │
 │                                                                │
 │  ┌─────────────┐                                               │
-│  │   Ralphy    │  ralphy --browser "task"                      │
-│  │  --browser  │                                               │
+│  │   Boucle    │  --browser "task"                             │
+│  │  autonome   │                                               │
 │  └──────┬──────┘                                               │
 │         │                                                      │
 │         ▼                                                      │
@@ -123,7 +123,7 @@ agent-browser close
 │         │                                                      │
 │         ▼                                                      │
 │  ┌─────────────────────────────────────────────────────────┐  │
-│  │  C:\Users\<USER>\bin\agent-browser  (script bash)       │  │
+│  │  C:\Users\<USER>\.local\bin\agent-browser (script bash) │  │
 │  │  #!/bin/bash                                            │  │
 │  │  wsl.exe -d Ubuntu -- npx agent-browser "$@"            │  │
 │  └──────┬──────────────────────────────────────────────────┘  │
@@ -139,7 +139,7 @@ agent-browser close
 └────────────────────────────────────────────────────────────────┘
 ```
 
-**Note**: Le wrapper `.cmd` est pour PowerShell/cmd.exe direct, le script bash (sans extension) est pour Ralphy qui utilise Git Bash.
+**Note**: Le wrapper `.cmd` est pour PowerShell/cmd.exe direct, le script bash (sans extension) est pour les outils qui utilisent Git Bash (Claude Code, lanceurs de boucle autonome).
 
 ## Commandes agent-browser
 
@@ -153,32 +153,29 @@ agent-browser close
 | `agent-browser screenshot <file>` | Capture d'ecran |
 | `agent-browser close` | Ferme le navigateur |
 
-## Utilisation avec Ralphy
+## Utilisation en boucle autonome
 
 ```powershell
 # Le flag --browser fonctionne maintenant
-ralphy --json tasks.json --parallel --max-par --browser
-
-# Verification pre-flight
-agent-browser --version  # Doit retourner la version
+agent-browser --version  # Verification pre-flight: doit retourner la version
 ```
 
 ## Depannage
 
-### "/usr/bin/bash: agent-browser: command not found" (Ralphy)
+### "/usr/bin/bash: agent-browser: command not found"
 
-Cette erreur signifie que Ralphy utilise Git Bash mais ne trouve que le wrapper `.cmd`.
+Cette erreur signifie que l'outil utilise Git Bash mais ne trouve que le wrapper `.cmd`.
 
 **Solution**: Creer le script bash (sans extension):
 ```bash
 # Creer le fichier
-cat > /c/Users/$USER/bin/agent-browser << 'EOF'
+cat > /c/Users/$USER/.local/bin/agent-browser << 'EOF'
 #!/bin/bash
 wsl.exe -d Ubuntu -- npx agent-browser "$@"
 EOF
 
 # Rendre executable
-chmod +x /c/Users/$USER/bin/agent-browser
+chmod +x /c/Users/$USER/.local/bin/agent-browser
 
 # Tester
 agent-browser --version
@@ -193,7 +190,7 @@ agent-browser --version
 
 2. Verifier le wrapper .cmd:
    ```powershell
-   Get-Content "$env:USERPROFILE\bin\agent-browser.cmd"
+   Get-Content "$env:USERPROFILE\.local\bin\agent-browser.cmd"
    ```
 
 3. Verifier le PATH:
@@ -233,18 +230,17 @@ wsl.exe -d Ubuntu -- npx agent-browser screenshot /tmp/capture.png
 wsl.exe -d Ubuntu -- bash -c "cp /tmp/capture.png /mnt/c/Users/<USERNAME>/Desktop/"
 ```
 
-### Ralphy affiche WARNING malgre l'installation
+### WARNING affiche malgre l'installation
 
 ```
 [WARN] --browser flag used but agent-browser CLI not found
 ```
 
-Cette erreur signifie que Ralphy (Bun) ne trouve pas `agent-browser` via `where`.
+Cette erreur signifie que le lanceur Windows ne trouve pas `agent-browser` via `where`.
 
-**Cause**: Le code source de Ralphy (`execution/browser.ts`) fait:
-```typescript
-const checkCommand = isWindows ? "where agent-browser" : "which agent-browser";
-execSync(checkCommand, { stdio: "ignore" });
+**Cause**: la detection se fait via `where agent-browser` (PATH Windows natif) :
+```
+isWindows ? "where agent-browser" : "which agent-browser"
 ```
 
 **Solution**: Les wrappers doivent etre dans un dossier present dans le **PATH Windows natif**
@@ -257,21 +253,16 @@ Le dossier recommande est `C:\Users\<USERNAME>\.local\bin` (generalement deja da
 Tester les deux environnements:
 
 ```bash
-# Test Git Bash (utilise par Ralphy)
+# Test Git Bash (utilise par Claude Code)
 which agent-browser
 agent-browser --version
 
 # Test PowerShell
 powershell.exe -Command "agent-browser --version"
-
-# Test Ralphy complet
-ralphy --browser --dry-run "test task"
-# Doit afficher: [INFO] Browser automation enabled (agent-browser)
 ```
 
 ## References
 
 - [agent-browser GitHub](https://github.com/vercel-labs/agent-browser)
 - [agent-browser npm](https://www.npmjs.com/package/agent-browser)
-- [Ralphy GitHub](https://github.com/michaelshimeles/ralphy)
 - [Guide complet agent-browser](https://help.apiyi.com/en/agent-browser-ai-browser-automation-cli-guide-en.html)

@@ -72,7 +72,6 @@ Afficher le catalogue ci-dessous en remplacant chaque `{status}` par :
 | {status} | `ateam` | ATeam — profils d'agents composables |
 | {status} | `agent-browser` | Agent Browser — navigation web automatisee |
 | {status} | `project-state-management` | Project State — gestion du contexte projet |
-| {status} | `ralph-workflow` | Ralph Workflow — PRD validation & boucle autonome |
 | {status} | `orni-installer` | Orni Installer — logique d'installation partagee |
 
 ### Commandes systeme Orni
@@ -94,6 +93,7 @@ Ces commandes sont toujours disponibles depuis le repo Orni-Skills :
 | Update/Followup | `/orni-init-uf` | `/orni-update-uf` |
 | Agent Browser | `/orni-init-ab` | `/orni-update-ab` |
 | ATeam | `/orni-init-at` | `/orni-update-at` |
+| Project State Mgmt | `/orni-init-psm` | `/orni-update-psm` |
 | VPS | `/orni-init-vps` | `/orni-update-vps` |
 | Cloudflare | `/orni-init-cf` | `/orni-update-cf` |
 | Deploy & Publish | `/orni-init-deploy` | `/orni-update-deploy` |
